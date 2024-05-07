@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm-run-all --parallel  start:index",
     "start:index": "node index.js",
-    "test": "echo \"Không có bài kiểm tra được chỉ định\" && exit 0"
+    "test": "echo \"Không có bài kiểm tra được chỉ định\" && exit 0",
+    "build": "npm i"
   },
   "keywords": [],
   "author": "",

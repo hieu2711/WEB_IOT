@@ -19,9 +19,10 @@ const { Sequelize, DataTypes } = require('sequelize');
 const Sensor = require("../server/models/Sensor");
 const authRoute = require("../server/routes/auth");
 const userRoute = require("../server/routes/user");
+require('dotenv').config();
 const { checkAndSaveData, saveDataToDatabase } = require("../server/controllers/utils");
-const sequelize = new Sequelize('innovation', 'root', 'hieu27112001@', {
-    host: 'localhost',
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
     dialect: 'mysql'
 });
 const brokerUrl = 'http://mqttserver.tk';
@@ -93,10 +94,10 @@ sequelize.sync()
 );
 
 const db = mysql.createConnection({
-    host: 'localhost', // Thay đổi thành địa chỉ MySQL của bạn
-    user: 'root', // Thay đổi thành tên người dùng MySQL của bạn
-    password: 'hieu27112001@', // Thay đổi thành mật khẩu MySQL của bạn
-      database: 'innovation' // Thay đổi thành tên cơ sở dữ liệu MySQL của bạn
+    host: process.env.DB_HOST, // Thay đổi thành địa chỉ MySQL của bạn
+    user: process.env.DB_USER, // Thay đổi thành tên người dùng MySQL của bạn
+    password: process.env.DB_PASSWORD, // Thay đổi thành mật khẩu MySQL của bạn
+      database: process.env.DB_NAME // Thay đổi thành tên cơ sở dữ liệu MySQL của bạn
   }
 );
   

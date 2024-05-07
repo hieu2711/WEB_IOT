@@ -15,7 +15,7 @@ const Station = sequelize.define('Station', {
     }
 }, {
   timestamps: false, // Tắt tự động tạo cột createdAt và updatedAt
-  tableName: 'Stations' // Đặt tên bảng nếu cần
+  tableName: 'stations' // Đặt tên bảng nếu cần
 });
 
 (async () => {

@@ -38,7 +38,7 @@ const User = sequelize.define('User', {
     }
 }, {
     timestamps: false, // Tắt tự động tạo cột createdAt và updatedAt
-    tableName: 'Users' // Đặt tên bảng nếu cần
+    tableName: 'users' // Đặt tên bảng nếu cần
 });
 
 (async () => {

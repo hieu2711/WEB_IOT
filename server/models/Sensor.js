@@ -30,7 +30,7 @@ const Sensor = sequelize.define('Sensor', {
     }
 }, {
     timestamps: false, // Tắt tự động tạo cột createdAt và updatedAt
-    tableName: 'Sensors' // Đặt tên bảng nếu cần
+    tableName: 'sensors' // Đặt tên bảng nếu cần
 });
 
 (async () => {

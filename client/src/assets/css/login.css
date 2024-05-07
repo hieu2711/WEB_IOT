@@ -1,0 +1,638 @@
+.css-19bmmkw {
+    width: 100vw;
+    max-width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    opacity: 1;
+    background: linear-gradient(159.02deg, rgb(15, 18, 59) 14.25%, rgb(9, 13, 46) 56.45%, rgb(2, 5, 21) 86.14%) transparent;
+    color: rgb(52, 71, 103);
+    overflow-x: hidden;
+    position: relative;
+}
+.css-i57t81 {
+    width: 100%;
+    margin-left: auto;
+    box-sizing: border-box;
+    margin-right: auto;
+    display: block;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.css-tubzw0 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border: 0.0625rem solid rgba(226, 232, 240, 0.3);
+    width: calc(100% - 48px);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    z-index: 3;
+    max-width: 1044px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    border-radius: 1.25rem;
+    box-shadow: rgba(20, 20, 20, 0.12) 0rem 0.25rem 0.375rem -0.0625rem, rgba(20, 20, 20, 0.07) 0rem 0.125rem 0.25rem -0.0625rem;
+    backdrop-filter: blur(42px);
+    transform: translate(-50%, 0px);
+}
+.css-1r96vb6 {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height: 1;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+a, a:link, a:visited {
+    text-decoration: none !important;
+}
+.css-1r96vb6 {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height: 1;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-ldavrr {
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    background-image: linear-gradient(97.89deg, rgb(255, 255, 255) 70.67%, rgba(117, 122, 140, 0) 108.55%);
+    display: inline-block;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+.css-bboo8v {
+    margin: 0px;
+    padding: 0px;
+    opacity: 1;
+    background: transparent;
+    color: inherit;
+    display: flex;
+}
+.css-10qjiem {
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 8px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    cursor: pointer;
+    user-select: none;
+}
+.css-9xdub1 {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    flex-shrink: 0;
+    color: rgb(255, 255, 255);
+    vertical-align: middle;
+    font-size: inherit !important;
+}
+.css-123dmr5 {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    opacity: 1;
+    text-transform: capitalize;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    width: 100%;
+    line-height: 0;
+}
+.css-r3agok {
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-w3ntbl {
+    line-height: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    opacity: 1;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+.css-1wubzod {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    flex-shrink: 0;
+    color: rgb(255, 255, 255);
+}
+.css-1nqj0ra {
+    margin-top: 160px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    margin-left: auto ;
+
+}
+.css-1qulzli {
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 350px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.css-kb9bp1 {
+    margin-bottom: 35px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-yefcpi {
+    margin: 0px 0px 10px;
+    font-size: 1.875rem;
+    line-height: 1.375;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    text-align: start;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+.css-1ixcmzz {
+    margin: 0px auto;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    line-height: 1.625;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    font-size: 0.875rem;
+    text-align: start !important;
+}
+.css-1desolg {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    top: 20px;
+    max-width: 350px;
+    margin-left: auto !important;
+}
+.css-7wmvu8 {
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-vz2i8e {
+    margin-bottom: 16px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-63xtou {
+    margin-bottom: 8px;
+    margin-left: 4px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1bw07gz {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+.css-19i8cn2 {
+    padding: 1px;
+    min-width: 100%;
+    opacity: 1;
+    background: radial-gradient(94.43% 69.43% at 50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%) transparent;
+    color: rgb(52, 71, 103);
+    border-radius: 0.9375rem;
+    height: fit-content;
+}
+.css-11ojv3i {
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    cursor: text;
+    -webkit-box-align: center;
+    pointer-events: auto;
+    border-radius: 0.9375rem;
+    border: 0.5px solid rgb(74, 85, 104);
+    padding: 0.5rem 0.75rem;
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: auto !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    background-clip: padding-box !important;
+    appearance: none !important;
+    transition: box-shadow 150ms ease 0s, border-color 150ms ease 0s, padding 150ms ease 0s !important;
+    background-color: rgb(15, 21, 53) !important;
+    color: rgb(255, 255, 255) !important;
+}
+.css-11ojv3i:focus-within {
+    border: 0.5px solid whitesmoke;
+    box-shadow: 0 0 0 0.02rem rgba(29, 199, 242, 0.2);
+}
+.css-r6q3am:focus-within{
+    border: 0.5px solid whitesmoke;
+    box-shadow: 0 0 0 0.02rem rgba(29, 199, 242, 0.2);
+}
+.css-1bqqmdo {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentcolor;
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    margin: 0px;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0px;
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    height: 1.375rem;
+    width: 100% !important;
+    padding: 0px !important;
+}
+.css-vz2i8e {
+    margin-bottom: 16px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-63xtou {
+    margin-bottom: 8px;
+    margin-left: 4px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1bw07gz {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+.css-r6q3am {
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    cursor: text;
+    -webkit-box-align: center;
+    pointer-events: auto;
+    border-radius: 0.9375rem;
+    border: 0.5px solid rgb(74, 85, 104);
+    padding: 0.5rem 0.75rem;
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: auto !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    background-clip: padding-box !important;
+    appearance: none !important;
+    transition: box-shadow 150ms ease 0s, border-color 150ms ease 0s, padding 150ms ease 0s !important;
+    background-color: rgb(15, 21, 53) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.css-1xs62qu {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1uqo1v8 {
+    display: inline-flex;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 0;
+    vertical-align: middle;
+    width: 2.5rem;
+    height: 1.25rem;
+    margin: 0.25rem 0px;
+    padding: 0px;
+    border-radius: 10rem;
+    transition: transform 250ms ease-in 0s;
+}
+.css-1fz8qj6 {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+.css-1cemjc5.Mui-checked {
+    transform: translate(1.375rem, -50%);
+}
+.css-1cemjc5.Mui-checked {
+    color: rgb(255, 255, 255);
+}
+.css-1cemjc5 .MuiSwitch-input {
+    left: -100%;
+    width: 300%;
+}
+.css-1m9pwf3 {
+    cursor: inherit;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 1;
+}
+.css-1s6t38b {
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(20, 20, 20, 0.12) 0rem 0.25rem 0.375rem -0.0625rem, rgba(20, 20, 20, 0.07) 0rem 0.125rem 0.25rem -0.0625rem;
+    top: 50%;
+}
+.css-1uqo1v8.MuiSwitch-root .MuiSwitch-thumb {
+    background-color: rgb(255, 255, 255);
+}
+.css-1uqo1v8.MuiSwitch-root .Mui-checked + .MuiSwitch-track {
+    background-color: rgb(0, 117, 255) !important;
+}
+.css-1cemjc5.Mui-checked + .MuiSwitch-track {
+    opacity: 1;
+    background-color: rgba(58, 65, 111, 0.95) !important;
+    border-color: rgba(58, 65, 111, 0.95) !important;
+}
+.css-1p5pdz0 {
+    margin-top: 32px;
+    margin-bottom: 8px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1b29d4y {
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    cursor: pointer;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    min-width: 64px;
+    width: 100%;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    line-height: 1.4;
+    text-align: center;
+    text-transform: unset;
+    user-select: none;
+    transition: all 150ms ease-in 0s;
+    min-height: 2.5rem;
+    box-shadow: rgba(0, 0, 0, 0.11) 0rem 0.25rem 0.4375rem -0.0625rem, rgba(0, 0, 0, 0.07) 0rem 0.125rem 0.25rem -0.0625rem;
+    padding: 0.75rem 1.5rem;
+    background-image: initial;
+    background-position-y: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(0, 117, 255);
+    color: rgb(255, 255, 255);
+    background-size: 150% !important;
+    background-position-x: 25% !important;
+}
+.css-1xyaojc {
+    margin-top: 24px;
+    text-align: center;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1j3s1sb {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(160, 174, 192);
+    font-weight: 400;
+}
+.css-1bw07gz {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+.css-1rxdjol {
+    height: 100%;
+    width: 50vw;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    overflow: hidden;
+}
+.css-1l23ay1 {
+    height: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+    background: url(/src/assets/img/signInImage.png) center center / cover transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1l23ay2 {
+    height: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+    background: url(/src/assets/img/signUpImage.png) center center / cover transparent;
+    color: rgb(52, 71, 103);
+}
+.css-l4zvol {
+    margin: 0px 0px 8px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.625;
+    text-align: start;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    letter-spacing: 8px;
+}
+.teamname{
+    color:rgb(255, 255, 255);
+}
+.css-a7yvop {
+    margin: 0px 0px 10px;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    text-align: start;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700;
+    background-image: linear-gradient(97.89deg, rgb(255, 255, 255) 70.67%, rgba(117, 122, 140, 0) 108.55%);
+    display: inline-block;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 8px;
+}
+.css-8fz3bm {
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 1044px;
+    min-height: 75vh;
+    margin: 0px auto;
+}
+
+.css-1qulzli {
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 350px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.Mui-focused{
+    border-color: rgba(226,232,240,0.6);
+    box-shadow: rgb(98,143,194) 0rem 0rem 0rem 0.1rem;
+    outline: 0px;
+}
+.css-1b29d4y:hover {
+    transform: scale(1.02);
+}
+input:focus {
+    outline: none;
+    border-color: transparent;
+}
+.css-15pdz0{
+    background-color: rgb(255, 255, 255) !important;
+    color: rgb(0, 117, 255) !important;
+    border: 2px solid rgb(0, 117, 255) !important;
+}
+@media screen and (max-width: 1430px) {
+    .css-a7yvop{
+        display: none;
+    }
+}
+@media screen and (max-width: 776px) {
+    .css-l4zvol{
+        display: none;
+    }
+    .css-1nqj0ra{
+        margin-top: 100px;
+        margin-left: 0;
+    }
+}

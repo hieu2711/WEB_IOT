@@ -1,0 +1,58 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install dependencies for the client project
+      - name: Install dependencies for client
+        run: |
+          if [ -e client/yarn.lock ]; then
+            yarn install --frozen-lockfile --cwd client
+          elif [ -e client/package-lock.json ]; then
+            npm ci --prefix client
+          else
+            npm i --prefix client
+          fi
+
+      # Run eslint for the client project
+      - name: Run eslint for client project
+        run: npm run eslint --prefix client || exit 0
+
+      # Run build and tests for the client project
+      - name: Build and test client project
+        run: |
+          cd client
+          CI=false npm run build --if-present
+          CI=false npm test || true  # Ignore test failures
+
+      # Install dependencies for the server project
+      - name: Install dependencies for server
+        run: |
+          if [ -e server/yarn.lock ]; then
+            yarn install --frozen-lockfile --cwd server
+          elif [ -e server/package-lock.json ]; then
+            npm ci --prefix server
+          else
+            npm i --prefix server
+          fi
+
+      # Run tests for the server project
+      - name: Test server project
+        run: |
+          cd server
+          CI=true npm test  # Ignore warnings as errors

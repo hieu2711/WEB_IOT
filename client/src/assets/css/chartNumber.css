@@ -1,0 +1,184 @@
+.css-7esj6 {
+    color: rgba(0, 0, 0, 0.87);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(120px);
+    position: relative;
+    min-width: 0px;
+    padding: 22px;
+    overflow-wrap: break-word;
+    border: 0px solid rgba(0, 0, 0, 0.125);
+    border-radius: 1.25rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+    height: 95%;
+    background: linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%) border-box;
+}
+body.white-content .css-7esj6 {
+    background: #f6f9fc;
+
+}
+body.white-content .css-ikv9x1{
+    color: rgb(160, 174, 192);
+}
+
+body.white-content .css-yw6lvj{
+    color: #1d253b;
+}
+.css-dwtd3h {
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    width: 100%;
+}
+.css-gthrti {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    margin-bottom: 40px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    width: 100%;
+}
+.css-ikv9x1 {
+    margin: 0px auto 0px 0px;
+    font-size: 1.125rem;
+    line-height: 1.625;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(160, 174, 192);
+    font-weight: 700;
+}
+.css-nlf9yq {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    background: rgb(34, 35, 75);
+    color: rgb(52, 71, 103);
+    width: 37px;
+    height: 37px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.css-1hoesrf {
+    gap: 16px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.css-mny4et {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    max-width: 40%;
+}
+.css-wvfoj4 {
+    display: flex;
+    width: 220px;
+    padding: 20px 22px;
+    flex-direction: column;
+    opacity: 1;
+    color: rgb(52, 71, 103);
+    background: #1E90FF !important;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+.css-adlsu3 {
+    margin: 0px 0px 5px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(160, 174, 192);
+    font-weight: 400;
+}
+.css-2a6unu {
+    margin: 0px;
+    font-size: 1.125rem;
+    line-height: 1.625;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+
+.css-wvfoj4 {
+    display: flex;
+    width: 220px;
+    padding: 20px 22px;
+    flex-direction: column;
+    opacity: 1;
+    color: rgb(52, 71, 103);
+    background: linear-gradient(126.97deg, rgb(6, 11, 40) 28.26%, rgb(10, 14, 35) 91.2%);
+    border-radius: 20px;
+}
+.css-1ttu4yl {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-aw2bmn {
+    margin: 0px 0px 4px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(160, 174, 192);
+}
+.css-yw6lvj {
+    margin: 0px 0px 4px;
+    font-size: 3rem;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+.css-1ijdpfi {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(160, 174, 192);
+}
+.progress-wrap{
+    display: flex;
+    justify-content: flex-start;
+}

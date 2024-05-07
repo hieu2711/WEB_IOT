@@ -1,0 +1,381 @@
+.css-8fz3bm {
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 1044px;
+    margin: 0px auto;
+}
+.css-19bmmkw {
+    width: 100vw;
+    max-width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    opacity: 1;
+    background: linear-gradient(159.02deg, rgb(15, 18, 59) 14.25%, rgb(9, 13, 46) 56.45%, rgb(2, 5, 21) 86.14%) transparent;
+    color: rgb(52, 71, 103);
+    overflow-x: hidden;
+    position: relative;
+}
+.css-1xvyjnn {
+    margin-top: 60px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    margin-left: auto !important;
+}
+.css-150mphl {
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 400px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.css-kb9bp1 {
+    margin-bottom: 35px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1d33lv5 {
+    margin: 0px 0px 10px;
+    font-size: 1.875rem;
+    line-height: 1.375;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    text-align: center;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+.css-ds61lh {
+    margin: 0px auto;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    line-height: 1.625;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    font-size: 0.875rem;
+    text-align: center !important;
+}
+.css-ds90uk {
+    padding-left: 24px;
+    margin-right: auto;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    margin-top: 45px;
+    max-width: 450px;
+    margin-left: auto ;
+}
+.css-kn8iqp {
+    padding: 2px;
+    min-width: 120%;
+    max-width: 120%;
+    opacity: 1;
+    background: radial-gradient(94.43% 69.43% at 50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%) transparent;
+    color: rgb(52, 71, 103);
+    border-radius: 1.5rem;
+    height: fit-content;
+}
+.css-1qu4u9j {
+    padding: 40px 70px;
+    opacity: 1;
+    background: rgb(19, 21, 56);
+    color: rgb(52, 71, 103);
+    border-radius: inherit;
+}
+.css-8fcuhg {
+    margin: 0px 0px 24px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    line-height: 1.625;
+    text-align: center;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+.css-mgpqwz {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.css-n992d {
+    padding: 2px;
+    opacity: 1;
+    background: radial-gradient(94.43% 69.43% at 50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%) transparent;
+    color: rgb(52, 71, 103);
+    border-radius: 1.25rem;
+    height: fit-content;
+}
+.css-vz2i8e {
+    margin-bottom: 16px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-63xtou {
+    margin-bottom: 8px;
+    margin-left: 4px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1bw07gz {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+.css-19i8cn2 {
+    padding: 1px;
+    min-width: 100%;
+    opacity: 1;
+    background: radial-gradient(94.43% 69.43% at 50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%) transparent;
+    color: rgb(52, 71, 103);
+    border-radius: 0.9375rem;
+    height: fit-content;
+}
+.css-r6q3am {
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    cursor: text;
+    -webkit-box-align: center;
+    pointer-events: auto;
+    border-radius: 0.9375rem;
+    border: 0.5px solid rgb(74, 85, 104);
+    padding: 0.5rem 0.75rem;
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: auto !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    background-clip: padding-box !important;
+    appearance: none !important;
+    transition: box-shadow 150ms ease 0s, border-color 150ms ease 0s, padding 150ms ease 0s !important;
+    background-color: rgb(15, 21, 53) !important;
+    color: rgb(255, 255, 255) !important;
+}
+.css-1bqqmdo {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentcolor;
+    border: 0px;
+    box-sizing: content-box;
+    background: none;
+    margin: 0px;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0px;
+    animation-name: mui-auto-fill-cancel;
+    animation-duration: 10ms;
+    height: 1.375rem;
+    width: 100% !important;
+    padding: 0px !important;
+}
+.css-1xs62qu {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1uqo1v8 {
+    display: inline-flex;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 0;
+    vertical-align: middle;
+    width: 2.5rem;
+    height: 1.25rem;
+    margin: 0.25rem 0px;
+    padding: 0px;
+    border-radius: 10rem;
+    transition: transform 250ms ease-in 0s;
+}
+.css-1fz8qj6 {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+.css-1cemjc5 {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    border-radius: 50%;
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+    padding: 0px;
+    top: 50%;
+    transform: translate(0.125rem, -50%);
+    transition: transform 250ms ease-in-out 0s;
+}
+.css-1p5pdz0 {
+    margin-top: 32px;
+    margin-bottom: 8px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1b29d4y {
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    cursor: pointer;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    min-width: 64px;
+    width: 100%;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    line-height: 1.4;
+    text-align: center;
+    text-transform: unset;
+    user-select: none;
+    transition: all 150ms ease-in 0s;
+    min-height: 2.5rem;
+    box-shadow: rgba(0, 0, 0, 0.11) 0rem 0.25rem 0.4375rem -0.0625rem, rgba(0, 0, 0, 0.07) 0rem 0.125rem 0.25rem -0.0625rem;
+    padding: 0.75rem 1.5rem;
+    background-image: initial;
+    background-position-y: initial;
+    background-repeat: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(0, 117, 255);
+    color: rgb(255, 255, 255);
+    background-size: 150% !important;
+    background-position-x: 25% !important;
+}
+.css-1xyaojc {
+    margin-top: 24px;
+    text-align: center;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+}
+.css-1j3s1sb {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(160, 174, 192);
+    font-weight: 400;
+}
+.css-1bw07gz {
+    margin: 0px;
+    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+@media screen and (max-width: 776px) {
+    .css-ds90uk{
+    margin-left: 0;
+    margin-right: 0;
+   }
+   .css-kn8iqp{
+    min-width: 100%;
+    max-width: 100%;
+   }
+}
+@media screen and (max-width: 776px) {
+.css-1xvyjnn {
+    max-width: 90%;
+    padding-right: 7px;
+    padding-left: 10px !important;
+}
+}
+@media screen and (max-width: 1023px) {
+.css-1xvyjnn {
+    margin-right: auto;
+    margin-left: auto !important;
+    
+}
+.css-kn8iqp{
+    min-width: 100%;
+    max-width: 100%;
+   }
+}
+@media screen and (max-width: 1440px) {
+.css-1xvyjnn {
+    margin-right: 50px;
+}
+}

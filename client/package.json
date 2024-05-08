@@ -2,7 +2,7 @@
   "name": "client",
   "version": "1.2.2",
   "private": true,
-  "homepage": "https://hieu2711.github.io/WEB_IOT/",
+  // "homepage": "https://hieu2711.github.io/WEB_IOT/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.4.0",
     "@mui/base": "^5.0.0-beta.39",

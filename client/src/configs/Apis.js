@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookies';
 const SERVER_CONTEXT = '/api/solar-air';
-export const SERVER = 'http://localhost:1104';
+export const SERVER = 'https://web-iot-server.onrender.com';
 export const endpoints = {
     info: `/api/air_0001`,
     chartTemp: `${SERVER_CONTEXT}/bieudonhietdo`,
@@ -32,7 +32,7 @@ export const endpoints = {
 export const authApi = () => {
     const token = localStorage.getItem('token');
     const instance = axios.create({
-        baseURL: 'http://localhost:1104',
+        baseURL: 'https://web-iot-server.onrender.com',
         headers: {
             Authorization: token ? `Bearer ${token}` : '',
         },

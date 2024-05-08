@@ -83,7 +83,7 @@ function UserProfile() {
         };
         try {
             const response = await fetch(
-                'http://localhost:1104/api/user?id=' + user.userid,
+                'https://web-iot-server.onrender.com/api/user?id=' + user.userid,
                 {
                     method: 'PUT',
                     headers: {

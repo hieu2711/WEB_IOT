@@ -25,7 +25,7 @@ function Chart({ data, number, commondata, renderChart }) {
         loadDataNoise();
     }, [hasNewData]);
     useEffect(() => {
-        const eventSource = new EventSource('http://localhost:1104/api/sse');
+        const eventSource = new EventSource('https://web-iot-server.onrender.com/api/sse');
 
         eventSource.onmessage = function (event) {
             const newData = JSON.parse(event.data);

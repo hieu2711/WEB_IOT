@@ -25,7 +25,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     host: process.env.DB_HOST,
     dialect: 'mysql'
 });
-const brokerUrl = 'http://mqttserver.tk';
+const brokerUrl = 'mqtt://mqttserver.tk';
 const brokerPort = 1883;
 const brokerUsername = 'innovation';
 const brokerPassword = 'Innovation_RgPQAZoA5N';

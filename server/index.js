@@ -42,9 +42,13 @@ const client = mqtt.connect(brokerUrl, {
     clean: CLEAN_SESSION,
 });
 
-client.on('connect', () => {
-    console.log('Connected to broker');
-    subscribeToTopic();
+client.on('connect', function () {
+    console.log('Connected to MQTT broker');
+    client.subscribe(topic, function (err) {
+        if (!err) {
+            console.log('Subscribed to', topic);
+        }
+    });
 });
 
 client.on('message', async (topic, receivedMessage) => {
@@ -63,16 +67,6 @@ client.on('message', async (topic, receivedMessage) => {
         // Xử lý lỗi ở đây
     }
 });
-
-function subscribeToTopic() {
-    client.subscribe(topic, (err, granted) => {
-        if (!err) {
-            console.log(`Subscribed to topic: ${topic}`);
-        } else {
-            console.error('Error while subscribing:', err);
-        }
-    });
-}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

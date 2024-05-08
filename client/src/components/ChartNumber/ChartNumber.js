@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import css from '../../assets/css/chartNumber.css';
 import ChartCirrcle from 'components/ChartCircle/ChartCircle';
 
@@ -9,6 +10,21 @@ function ChartNumber({
     dataPower,
     name,
 }) {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 576);
+        };
+
+        // Gọi handleResize khi kích thước cửa sổ thay đổi
+        window.addEventListener('resize', handleResize);
+
+        // Gỡ bỏ event listener khi component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); 
     return (
         <div
             className={`MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-7esj6 ${additionalClass.additionalClass === 'additional-white-class' ? 'white-content' : ''}`}
@@ -46,14 +62,16 @@ function ChartNumber({
                             </span>
                         </div>
                     </div>
-                    <div className="circle-progress-wrap">
-                        <div className="MuiBox-root css-1ttu4yl">
-                            <ChartCirrcle 
-                                additionalClass={additionalClass}
-                                data={dataPower}
-                            />
+                    {!isMobile && (
+                        <div className="circle-progress-wrap">
+                            <div className="MuiBox-root css-1ttu4yl">
+                                <ChartCirrcle 
+                                    additionalClass={additionalClass}
+                                    data={dataPower}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

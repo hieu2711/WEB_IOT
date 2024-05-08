@@ -33,7 +33,8 @@
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
     "sass": "1.62.1",
-    "sweetalert2": "^11.10.7"
+    "sweetalert2": "^11.10.7",
+    "vercel": "^34.1.9"
   },
   "scripts": {
     "start": "react-scripts start",

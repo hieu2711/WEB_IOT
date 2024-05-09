@@ -4,7 +4,7 @@ import React from 'react';
 import { Dropdown, DropdownToggle, Badge } from 'reactstrap';
 import { ThemeContext, themes } from 'contexts/ThemeContext';
 import { backgroundColors } from 'contexts/BackgroundColorContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../../reducers/languageSlice';
 function FixedPlugin(props) {
     const [dropDownIsOpen, setdropDownIsOpen] = React.useState(false);

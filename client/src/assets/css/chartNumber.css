@@ -182,3 +182,8 @@ body.white-content .css-yw6lvj{
     display: flex;
     justify-content: flex-start;
 }
+@media screen and (max-width: 567px) {
+    .css-1ttu4yl{
+        visibility: hidden;
+    }
+}

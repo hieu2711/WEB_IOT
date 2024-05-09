@@ -13,11 +13,13 @@ import routes from 'routes.js';
 
 import logo from 'assets/img/react-logo.png';
 import { BackgroundColorContext } from 'contexts/BackgroundColorContext';
+import { useSelector } from 'react-redux';
 
 var ps;
 
 function Admin(props) {
     const location = useLocation();
+    const language = useSelector((state) => state.language.language);
     const mainPanelRef = React.useRef(null);
     const [sidebarOpened, setsidebarOpened] = React.useState(
         document.documentElement.className.indexOf('nav-open') !== -1,
@@ -94,7 +96,7 @@ function Admin(props) {
                 location.pathname.indexOf(routes[i].layout + routes[i].path) !==
                 -1
             ) {
-                return routes[i].name;
+                return language === 'en' ? routes[i].name : routes[i].vi;
             }
         }
     };

@@ -11,6 +11,7 @@ var routes = [
         icon: 'tim-icons icon-chart-pie-36',
         component: <Dashboard />,
         layout: '/admin',
+        vi:'BẢNG ĐIỀU KHIỂN'
     },
     {
         path: '/statistical',
@@ -18,6 +19,7 @@ var routes = [
         icon: 'tim-icons icon-chart-bar-32',
         component: <Statistical />,
         layout: '/admin',
+        vi:'THỐNG KÊ'
     },
     {
         path: '/user-profile',
@@ -25,6 +27,7 @@ var routes = [
         icon: 'tim-icons icon-single-02',
         component: <UserProfile />,
         layout: '/admin',
+        vi:'TRANG CÁ NHÂN'
     },
     {
         path: '/user-management',
@@ -32,6 +35,7 @@ var routes = [
         icon: 'tim-icons icon-pencil',
         component: <UserManagement />,
         layout: '/admin',
+        vi:'QUẢN LÝ NGƯỜI DÙNG'
     },
     {
         path: '/',
@@ -39,6 +43,7 @@ var routes = [
         icon: 'tim-icons icon-key-25',
         component: <Login />,
         layout: '/sign-in',
+        vi:'ĐĂNG NHẬP'
     },
     {
         path: '/',
@@ -46,6 +51,7 @@ var routes = [
         icon: 'tim-icons icon-double-right',
         component: <Register />,
         layout: '/sign-up',
+        vi:'ĐĂNG KÍ'
     },
 ];
 export default routes;

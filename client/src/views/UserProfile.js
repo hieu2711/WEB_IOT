@@ -160,7 +160,9 @@ function UserProfile() {
                                         </Col>
                                         <Col className="px-md-1" md="5">
                                             <FormGroup>
-                                                <label>Username</label>
+                                                <label>{language === 'en'
+                                                        ? 'Username'
+                                                        : 'Tên đăng nhập'}</label>
                                                 <Input
                                                     placeholder="Username"
                                                     type="text"

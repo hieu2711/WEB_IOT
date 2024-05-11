@@ -58,7 +58,6 @@ function ListUser({ language }) {
             console.error('Error:', error);
         }
     };
-    console.log(language);
     return (
         <Row>
             <Col md="12">

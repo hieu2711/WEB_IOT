@@ -21,6 +21,7 @@ function Login() {
     const [passwordFromChild, setPasswordFromChild] = useState('');
     const [emailKey, setEmailKey] = useState(0);
     const [renew, setReNew] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const handleUserNameChange = (e) => {
         setUserName(e.target.value.trim());
     };
@@ -40,6 +41,7 @@ function Login() {
         setEmailKey((prevKey) => prevKey + 1);
     };
     const handleSignIn = async () => {
+        setIsLoading(true);
         try {
             const response = await fetch(`${SERVER}/api/auth/login`, {
                 method: 'POST',
@@ -69,6 +71,8 @@ function Login() {
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
+        } finally{
+            setIsLoading(false);
         }
     };
 
@@ -120,13 +124,11 @@ function Login() {
             localStorage.setItem('isLoggedIn', 'true');
 
             dispatch(loginSuccess(data));
-            console.log('Đăng nhập thành công:', data);
             <Navigate to="/admin/dashboard" />;
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
         }
-        console.log(passwordFromChild);
     };
     if (isLoggedIn) {
         return <Navigate to="/admin/dashboard" />;
@@ -398,6 +400,7 @@ function Login() {
                                             {value ? 'Đăng kí' : 'Sign up'}
                                         </Link>
                                     </span>
+                                    {isLoading && <BeatLoader color='white' />}
                                 </div>
                             ) : (
                                 <div className="MuiBox-root css-1xyaojc">

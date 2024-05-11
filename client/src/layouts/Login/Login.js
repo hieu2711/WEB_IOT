@@ -6,7 +6,7 @@ import { loginSuccess, selectIsLoggedIn } from '../../reducers/userSlice';
 import PasswordOTP from 'components/PasswordOTP/PasswordOTP';
 import Toogle from 'components/Toogle/Toogle';
 import { SERVER } from 'configs/Apis';
-
+import { BeatLoader } from 'react-spinners';
 function Login() {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -100,6 +100,7 @@ function Login() {
         }
     };
     const handleVerifyOTP = async () => {
+        setIsLoading(true);
         try {
             const response = await fetch(`${SERVER}/api/auth/verifyotp`, {
                 method: 'POST',
@@ -128,6 +129,8 @@ function Login() {
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
+        } finally{
+            setIsLoading(false)
         }
     };
     if (isLoggedIn) {
@@ -418,6 +421,7 @@ function Login() {
                                         >
                                             {value ? 'Đăng nhập' : 'Sign in'}
                                         </Link>
+                                        {isLoading && <BeatLoader color='white' />}
                                     </span>
                                 </div>
                             )}

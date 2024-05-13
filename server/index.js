@@ -424,55 +424,45 @@ app.get('/api/solar-air/bieudonangluongvadoamTK', async (req, res) => {
     let month = req.query.month || new Date().getMonth() + 1;
     let day = req.query.day || new Date().getDate();
 
-    let dateCondition;
-    if (day) {
-        dateCondition = `DAY(sensors_datetime) = "${day}"`;
+    let dateCondition = '';
+    if (year && month && day) {
+        dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}" AND DAY(sensors_datetime) = "${day}"`;
+    } else if (year && month) {
+        dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}"`;
     } else {
-        dateCondition = `MONTH(sensors_datetime) = "${month}"`;
+        return res.status(400).json({ error: 'Thiếu tham số ngày/tháng/năm' });
     }
 
     const sql1 = `
-        SELECT *
-        FROM (
-            SELECT
-                DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s') AS date,
-                ROUND(AVG(sensors_value), 0) AS average_1
-            FROM
-                sensors
-            WHERE
-                LOWER(sensors_name) = 'humi_0001'
-                AND ${dateCondition}
-                AND YEAR(sensors_datetime) = "${year}"
-            GROUP BY
-                DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s'), sensors_datetime
-            ORDER BY
-                sensors_datetime DESC
-            LIMIT 12
-        ) AS subquery
+        SELECT
+            DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s') AS date,
+            ROUND(AVG(sensors_value), 0) AS average_1
+        FROM
+            sensors
+        WHERE
+            LOWER(sensors_name) = 'humi_0001'
+            AND ${dateCondition}
+        GROUP BY
+            DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s')
         ORDER BY
-            date ASC;    
+            DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s') DESC
+        LIMIT 12;
     `;
 
     const sql2 = `
-        SELECT *
-        FROM (
-            SELECT
-                DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s') AS date,
-                ROUND(AVG(sensors_value * 100), 0) AS average_2
-            FROM
-                sensors
-            WHERE
-                LOWER(sensors_name) = 'power_0001'
-                AND ${dateCondition}
-                AND YEAR(sensors_datetime) = "${year}"
-            GROUP BY
-                DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s'), sensors_datetime
-            ORDER BY
-                sensors_datetime DESC
-            LIMIT 12
-        ) AS subquery
+        SELECT
+            DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s') AS date,
+            ROUND(AVG(sensors_value * 100), 0) AS average_2
+        FROM
+            sensors
+        WHERE
+            LOWER(sensors_name) = 'power_0001'
+            AND ${dateCondition}
+        GROUP BY
+            DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s')
         ORDER BY
-            date ASC;    
+            DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s') DESC
+        LIMIT 12;
     `;
 
     try {
@@ -480,6 +470,11 @@ app.get('/api/solar-air/bieudonangluongvadoamTK', async (req, res) => {
             new Promise((resolve, reject) => db.query(sql1, (err, result) => err ? reject(err) : resolve(result))),
             new Promise((resolve, reject) => db.query(sql2, (err, result) => err ? reject(err) : resolve(result)))
         ]);
+
+        // Kiểm tra xem kết quả trả về có dữ liệu không
+        if (results1.length === 0 || results2.length === 0) {
+            return res.json([]);
+        }
 
         const combinedResults = results1.map((tempRow, index) => ({
             date: tempRow.date,
@@ -638,13 +633,15 @@ const sql2 = `
 app.get('/api/solar-air/bieudotiengonvakhongkhiTop10', async (req, res) => {
     let year = req.query.year || new Date().getFullYear();
     let month = req.query.month || new Date().getMonth() + 1;
-    let day = req.query.day || null; // Khởi tạo day là null
+    let day = req.query.day || new Date().getDate();
 
-    let dateCondition;
-    if (day) {
-        dateCondition = `DAY(sensors_datetime) = "${day}"`;
+    let dateCondition = '';
+    if (year && month && day) {
+        dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}" AND DAY(sensors_datetime) = "${day}"`;
+    } else if (year && month) {
+        dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}"`;
     } else {
-        dateCondition = `MONTH(sensors_datetime) = "${month}"`;
+        return res.status(400).json({ error: 'Thiếu tham số ngày/tháng/năm' });
     }
 
     const sql1 = `
@@ -709,6 +706,7 @@ app.get('/api/solar-air/bieudotiengonvakhongkhiTop10', async (req, res) => {
         res.status(500).json({ error: 'Lỗi truy vấn cơ sở dữ liệu' });
     }
 });
+
 
 
 //Thoogs kê theo khoảng ngày mà người dùng nhập vào thống kê tiếng ồn và không khí 

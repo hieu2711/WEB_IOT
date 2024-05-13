@@ -57,9 +57,9 @@ const authController = {
             // Kiểm tra xem username có chứa ít nhất một chữ cái không
         const containsLetterUser = /[a-zA-Z]/.test(username);
         if (!containsLetterUser) {
-            return res.status(400).json({ error: language === 'en' ? 'The username must contain letters!' : 'Tên người dùng phải chứa chữ cái!' });
+            return res.status(400).json({ message: language === 'en' ? 'The username must contain letters!' : 'Tên người dùng phải chứa chữ cái!' });
         }
-        
+
             // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu chưa
             const existingEmail = await User.findOne({ where: { email } });
             if (existingEmail) {

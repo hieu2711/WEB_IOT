@@ -11,19 +11,23 @@ import {
 } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { SERVER } from 'configs/Apis';
+import { BeatLoader } from 'react-spinners';
 function ListUser({ language }) {
     const [list, setList] = useState();
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         fetchUsers();
     }, []);
 
     const fetchUsers = async () => {
+        setLoading(true)
         try {
             const { data } = await authApi().get('/api/user');
             setList(data);
         } catch (error) {
             console.error('Error', error);
         }
+        setLoading(false)
     };
     const handleDelete = async (userId) => {
         Swal.fire({
@@ -118,6 +122,7 @@ function ListUser({ language }) {
                                 )}
                             </tbody>
                         </Table>
+                        {loading && <BeatLoader color='white' />}
                     </CardBody>
                 </Card>
             </Col>

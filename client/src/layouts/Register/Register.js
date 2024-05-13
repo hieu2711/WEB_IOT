@@ -24,6 +24,28 @@ function Register() {
             });
             return;
         }
+
+        // Kiểm tra mật khẩu có ít nhất 6 ký tự và chứa cả chữ và số
+        const containsNumber = /\d/.test(password);
+        const containsLetter = /[a-zA-Z]/.test(password);
+        if (!containsNumber || !containsLetter || password.length < 6) {
+            Swal.fire({
+                text: language === 'en' ? 'Passwords must contain at least 6 characters and include both letters and numbers!' : 'Mật khẩu phải chứa ít nhất 6 ký tự và bao gồm cả chữ cái và số!',
+                icon: 'error',
+            });
+            return;
+        }
+
+        // Kiểm tra tên người dùng có chứa ít nhất một chữ cái
+        const containsLetterUser = /[a-zA-Z]/.test(userName);
+        if (!containsLetterUser) {
+            Swal.fire({
+                text: language === 'en' ? 'The username must contain letters!' : 'Tên người dùng phải chứa chữ cái!',
+                icon: 'error',
+            });
+            return;
+        }
+
     
         try {
             const response = await fetch(`${SERVER}/api/auth/register_viewer`, {

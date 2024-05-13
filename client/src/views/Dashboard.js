@@ -17,6 +17,7 @@ function Dashboard(props) {
     const [hasNewData, setHasNewData] = useState(false);
     const [renderChart, setRenderChart] = useState(1);
     const { t } = useTranslation();
+    const language = useSelector((state) => state.language.language);
     useEffect(() => {
         if (theme === 'white-content') {
             setAdditionalClass('additional-white-class');
@@ -57,8 +58,9 @@ function Dashboard(props) {
 
         eventSource.onmessage = function (event) {
             const newData = JSON.parse(event.data);
-            // Cập nhật giao diện với dữ liệu mới từ newData
-            Swal.fire('Updating data', 'Data has been updated!', 'success');
+            const message = language === 'en' ? 'Data has been updated!' : 'Dữ liệu đã được cập nhật!';
+            const title = language === 'en' ? 'Updating data' : 'Cập nhật dữ liệu';
+            Swal.fire(title, message, 'success');
             setHasNewData(true);
         };
 

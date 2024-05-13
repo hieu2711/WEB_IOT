@@ -59,7 +59,7 @@ const authController = {
                 return res.status(400).json({ message: language === 'en' ? 'Email already exists' : 'Email đã tồn tại' });
             }
             // Băm mật khẩu
-            const hashedPassword = await bcrypt.hash('123456', saltRounds);
+            const hashedPassword = await bcrypt.hash('user123456', saltRounds);
     
             // Thêm người dùng mới vào cơ sở dữ liệu
             const newUser = await User.create({ username, password: hashedPassword, name, email, roles: 'User' });
@@ -95,7 +95,7 @@ const authController = {
             }
             // Băm mật khẩu
             const hashedPassword = await bcrypt.hash(password, saltRounds);
-    
+
             // Thêm người dùng mới vào cơ sở dữ liệu
             const newUser = await User.create({ username, password: hashedPassword, name, email, roles: 'Viewer' });
             return res.status(200).json({ message: language === 'en' ? 'Register Successfully!' : 'Đăng ký thành công!' });

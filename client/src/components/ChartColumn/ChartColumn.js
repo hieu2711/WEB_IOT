@@ -75,7 +75,6 @@ function ChartColumn({ data, name, unit, update }) {
     const handleMouseLeave = () => {
         handleResetZoom();
     };
-    console.log(isHovered)
     return (
         <Card className="card-chart">
             <CardHeader>

@@ -421,8 +421,8 @@ function Login() {
                                         >
                                             {value ? 'Đăng nhập' : 'Sign in'}
                                         </Link>
-                                        {isLoading && <BeatLoader color='white' />}
                                     </span>
+                                    {isLoading && <BeatLoader color='white' />}
                                 </div>
                             )}
                         </form>

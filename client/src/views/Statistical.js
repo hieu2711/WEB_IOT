@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import '../assets/scss/black-dashboard-react/custom/statistical.scss';
 import ChartCheckServer from 'components/ChartCheckServer/ChartCheckServer';
+import { BeatLoader } from 'react-spinners';
 function Statistical() {
     const [type, setType] = useState('');
     const [dataTable, setDataTable] = useState();
@@ -25,7 +26,9 @@ function Statistical() {
     const [checkServer, setCheckServer] = useState('');
     const { t } = useTranslation();
     const language = useSelector((state) => state.language.language);
+    const [loading, setLoading] = useState(true);
     const fetchData = async () => {
+        setLoading(true);
         if (selectedDay !== '') {
             const info = selectedDay.split('-');
             let { data } = await authApi().get(
@@ -51,6 +54,7 @@ function Statistical() {
                 endpoints['tableDetailsMinAndMax'](info[0], info[1], info[2]),
             );
             setDataTable(dataTable.data);
+            setLoading(false); 
         }
 
         if (selectedMonth !== '' && selectedYear !== '') {
@@ -99,6 +103,7 @@ function Statistical() {
             } else {
                 return;
             }
+            setLoading(false); 
         }
 
         if (selectedStartDay !== '' && selectedEndDay !== '') {
@@ -166,6 +171,7 @@ function Statistical() {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
+            setLoading(false); 
         }
     };
 
@@ -498,7 +504,11 @@ function Statistical() {
                     </button>
                 </ButtonGroup>
             </div>
-
+            {loading && type !== '' ? (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                <BeatLoader color='white' />
+            </div>
+        ) : (
             <Row>
                 <Col className="mt-4" xs="12">
                     {data && data.length > 0 ? (
@@ -582,6 +592,7 @@ function Statistical() {
                     </h3>
                 )}
             </Row>
+        )}
         </div>
     );
 }

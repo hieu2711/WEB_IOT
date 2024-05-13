@@ -5,21 +5,27 @@ import RoundChart from 'components/RoundChart/RoundChart';
 import { authApi, endpoints } from 'configs/Apis';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { BeatLoader } from 'react-spinners';
 import { Col, Row } from 'reactstrap';
 function Chart({ data, number, commondata, renderChart }) {
     const [dataTemp, setDataTemp] = useState();
     const [dataPower, setDataPower] = useState();
     const [hasNewData, setHasNewData] = useState(false);
     const language = useSelector((state) => state.language.language);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
+        setLoading(true); 
         const loadDataTemp = async () => {
             let { data } = await authApi().get(endpoints['chartTemp']);
             setDataTemp(data);
+            setLoading(false);
         };
 
         const loadDataNoise = async () => {
+            setLoading(true); 
             let { data } = await authApi().get(endpoints['chartPower']);
             setDataPower(data);
+            setLoading(false); 
         };
         loadDataTemp();
         loadDataNoise();
@@ -29,8 +35,6 @@ function Chart({ data, number, commondata, renderChart }) {
 
         eventSource.onmessage = function (event) {
             const newData = JSON.parse(event.data);
-            // Cập nhật giao diện với dữ liệu mới từ newData
-            console.log('Received new data from server:', newData);
             setHasNewData(true);
         };
 
@@ -40,6 +44,12 @@ function Chart({ data, number, commondata, renderChart }) {
     }, []);
     return (
         <>
+         {loading ? ( 
+               <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+               <BeatLoader color='white' />
+           </div>
+            ) : (
+                <>
             {renderChart === 1 && (
                 <>
                     <Row>
@@ -220,6 +230,8 @@ function Chart({ data, number, commondata, renderChart }) {
                 </>
             )}
         </>
+            )}
+            </>
     );
 }
 

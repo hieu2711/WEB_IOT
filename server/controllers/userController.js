@@ -36,6 +36,27 @@ const userController = {
                     ]
                 }
             });
+
+              //kiểm tra mật khẩu mạnh
+             // Kiểm tra xem mật khẩu có ít nhất 6 ký tự không
+        if (password.length < 6) {
+            return res.status(400).json({ error: language === 'en' ? 'Password must be at least 6 characters long!' : 'Mật khẩu phải có ít nhất 6 ký tự!' });
+        }
+
+        // Kiểm tra xem mật khẩu có ít nhất một số và một chữ cái không
+        const containsNumber = /\d/.test(password);
+        const containsLetter = /[a-zA-Z]/.test(password);
+        if (!containsNumber || !containsLetter) {
+            return res.status(400).json({ error: language === 'en' ? 'Passwords must contain both words and numbers!' : 'Mật khẩu phải chứa cả chữ và số!' });
+        }
+
+        // Kiểm tra xem username có chứa ít nhất một chữ cái không
+        const containsLetterUser = /[a-zA-Z]/.test(username);
+        if (!containsLetterUser) {
+            return res.status(400).json({ error: language === 'en' ? 'The username must contain letters!' : 'Tên người dùng phải chứa chữ cái!' });
+        }
+
+        
             if (existingUser) {
                 return res.status(400).json({ error: language === 'en' ? 'Username or email already exists!' : 'Tên người dùng hoặc email đã tồn tại!' });
             }

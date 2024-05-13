@@ -32,7 +32,7 @@ var routes = [
     {
         path: '/user-management',
         name: 'User Management',
-        icon: 'tim-icons icon-pencil',
+        icon: 'tim-icons icon-settings',
         component: <UserManagement />,
         layout: '/admin',
         vi:'QUẢN LÝ NGƯỜI DÙNG'

@@ -1,10 +1,10 @@
 {
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "requireConfigFile": false
-  },
-  "rules": {
-    "no-unused-vars": "off",
-    "react-hooks/exhaustive-deps": "off"
-  }
+  // "parser": "@babel/eslint-parser",
+  // "parserOptions": {
+  //   "requireConfigFile": false
+  // },
+  // "rules": {
+  //   "no-unused-vars": "off",
+  //   "react-hooks/exhaustive-deps": "off"
+  // }
 }

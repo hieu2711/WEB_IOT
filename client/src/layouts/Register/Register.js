@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Toogle from 'components/Toogle/Toogle';
 import { SERVER } from 'configs/Apis';
 import Swal from 'sweetalert2';
+import { BeatLoader } from 'react-spinners';
 function Register() {
     const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
@@ -13,6 +14,7 @@ function Register() {
     const [registerFail, setRegisterFail] = useState('');
     const [value, setValue] = useState(false);
     const [language, setLanguage] = useState(value ? 'vi' : 'en');
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setLanguage(value ? 'vi' : 'en');
     }, [value]);
@@ -46,7 +48,7 @@ function Register() {
             return;
         }
 
-    
+        setIsLoading(true);
         try {
             const response = await fetch(`${SERVER}/api/auth/register_viewer`, {
                 method: 'POST',
@@ -73,6 +75,8 @@ function Register() {
         } catch (error) {
             console.error('Lỗi khi đăng kí:', error.message);
             setRegisterFail(error.message);
+        } finally{
+            setIsLoading(false);
         }
     };
     if (isSignUp) {
@@ -293,6 +297,7 @@ function Register() {
                                                     : 'Sign in'}
                                             </Link>
                                         </span>
+                                        {isLoading && <BeatLoader color='white' />}
                                     </div>
                                 </form>
                             </div>

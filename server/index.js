@@ -633,15 +633,15 @@ const sql2 = `
 app.get('/api/solar-air/bieudotiengonvakhongkhiTop10', async (req, res) => {
     let year = req.query.year || new Date().getFullYear();
     let month = req.query.month || new Date().getMonth() + 1;
-    let day = req.query.day || new Date().getDate();
+    let day = req.query.day || null;
 
     let dateCondition = '';
-    if (year && month && day) {
+    if (day) {
+        // Nếu có nhập ngày, sử dụng ngày, tháng và năm
         dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}" AND DAY(sensors_datetime) = "${day}"`;
-    } else if (year && month) {
-        dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}"`;
     } else {
-        return res.status(400).json({ error: 'Thiếu tham số ngày/tháng/năm' });
+        // Nếu chỉ nhập tháng, sử dụng chỉ tháng và năm
+        dateCondition = `YEAR(sensors_datetime) = "${year}" AND MONTH(sensors_datetime) = "${month}"`;
     }
 
     const sql1 = `

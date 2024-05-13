@@ -97,13 +97,14 @@ function Statistical() {
             );
             const monthData = dataCheckServer.data.monthData;
             setCheckServer(monthData);
-
+            setLoading(false); 
+            
             if (data && data.length > 0) {
                 setData(data);
             } else {
                 return;
             }
-            setLoading(false); 
+            
         }
 
         if (selectedStartDay !== '' && selectedEndDay !== '') {

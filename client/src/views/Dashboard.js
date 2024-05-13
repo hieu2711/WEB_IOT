@@ -6,6 +6,7 @@ import { Button, ButtonGroup } from 'reactstrap';
 import { authApi, endpoints } from 'configs/Apis';
 import Swal from 'sweetalert2';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 function Dashboard(props) {
     const [type, setType] = useState('chart');

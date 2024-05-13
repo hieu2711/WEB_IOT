@@ -14,12 +14,15 @@ import {
 } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { SERVER } from 'configs/Apis';
+import { BeatLoader } from 'react-spinners';
 function AddUser() {
     const [userName, setUserName] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const language = useSelector((state) => state.language.language);
+    const [loading, setLoading] = useState(false);
     const handleRegister = async () => {
+        setLoading(true)
         if (/\s/.test(userName) || /\s/.test(email)) {
             Swal.fire({
                 text: language === 'en' ? 'Username, email must not contain spaces in between!' : 'Tên đăng nhập, email không được chứa khoảng trắng ở giữa!',
@@ -69,6 +72,7 @@ function AddUser() {
                 'error',
             );
         }
+        setLoading(false)
     };
     return (
         <>
@@ -169,6 +173,7 @@ function AddUser() {
                             >
                                 {language === 'en' ? 'Add' : 'Thêm'}
                             </Button>
+                            {loading && <BeatLoader color='white' />}
                         </CardFooter>
                     </Card>
                 </Col>

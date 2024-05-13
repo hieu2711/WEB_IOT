@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../reducers/userSlice';
 import { updateUser } from '../reducers/userSlice';
+import { BeatLoader } from 'react-spinners';
 
 // reactstrap components
 import {
@@ -30,6 +31,7 @@ function UserProfile() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const language = useSelector((state) => state.language.language);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
         if (userFromLocalStorage) {
@@ -50,6 +52,7 @@ function UserProfile() {
         }
     }, [user]);
     const handleUpdateUser = async () => {
+        setLoading(true)
         if (/\s/.test(newPassword) || /\s/.test(confirmNewPassword) || /\s/.test(userName)) {
             Swal.fire({
                 text: language === 'en' ? 'Do not have spaces!' : 'Không được có khoảng trắng!',
@@ -121,6 +124,7 @@ function UserProfile() {
                 'error',
             );
         }
+        setLoading(false)
     };
     if (isLoading) {
         return <div>Loading...</div>;
@@ -292,6 +296,7 @@ function UserProfile() {
                                 >
                                     {language === 'en' ? 'Save' : 'Lưu'}
                                 </Button>
+                                {loading && <BeatLoader color='white' />}
                             </CardFooter>
                         </Card>
                     </Col>

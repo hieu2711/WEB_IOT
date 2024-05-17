@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import '../assets/scss/black-dashboard-react/custom/statistical.scss';
 import ChartCheckServer from 'components/ChartCheckServer/ChartCheckServer';
 import { BeatLoader } from 'react-spinners';
+import { Navigate } from 'react-router-dom';
 function Statistical() {
     const [type, setType] = useState('');
     const [dataTable, setDataTable] = useState();
@@ -27,6 +28,7 @@ function Statistical() {
     const { t } = useTranslation();
     const language = useSelector((state) => state.language.language);
     const [loading, setLoading] = useState(true);
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
     const fetchData = async () => {
         setLoading(true);
         if (selectedDay !== '') {
@@ -358,6 +360,9 @@ function Statistical() {
         selectedStartDay,
         selectedEndDay,
     ]);
+    if (!isLoggedIn) {
+        return <Navigate to="/sign-in" />;
+    }
     return (
         <div className="content">
             <div className="d-flex  align-items-center statistical">

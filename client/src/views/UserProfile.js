@@ -19,6 +19,7 @@ import {
     Col,
 } from 'reactstrap';
 import Swal from 'sweetalert2';
+import { Navigate } from 'react-router-dom';
 
 function UserProfile() {
     const dispatch = useDispatch();

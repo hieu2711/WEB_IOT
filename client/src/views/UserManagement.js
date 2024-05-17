@@ -4,10 +4,15 @@ import { ButtonGroup } from 'reactstrap';
 import ListUser from 'components/ListUser/ListUser';
 import AddUser from 'components/AddUser/AddUser';
 import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 function UserManagement() {
     const [type, setType] = useState('List');
     const language = useSelector((state) => state.language.language);
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+        return <Navigate to="/sign-in" />;
+    }
     return (
         <>
             <div className="content">

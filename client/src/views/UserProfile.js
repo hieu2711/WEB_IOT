@@ -32,6 +32,7 @@ function UserProfile() {
     const [email, setEmail] = useState('');
     const language = useSelector((state) => state.language.language);
     const [loading, setLoading] = useState(false);
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
     useEffect(() => {
         const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
         if (userFromLocalStorage) {
@@ -128,6 +129,9 @@ function UserProfile() {
     };
     if (isLoading) {
         return <div>Loading...</div>;
+    }
+    if (!isLoggedIn) {
+        return <Navigate to="/sign-in" />;
     }
     return (
         <>

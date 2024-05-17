@@ -20,6 +20,7 @@ function Dashboard(props) {
     const { t } = useTranslation();
     const language = useSelector((state) => state.language.language);
     const [loading,setLoading] = useState(false)
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
     useEffect(() => {
         if (theme === 'white-content') {
             setAdditionalClass('additional-white-class');
@@ -43,6 +44,7 @@ function Dashboard(props) {
                 (item) => item.sensors_name === 'atmosphere_0001',
             );
             setNumber(Math.floor(number[0].sensors_value));
+            setLoading(false)
         };
 
         const loadDataColapse = async () => {
@@ -50,11 +52,11 @@ function Dashboard(props) {
                 endpoints['chartPowerAndHudmityTop10'],
             );
             setDataColapse(data);
+            setLoading(false)
         };
         loadInfo();
         loadDataColapse();
         setHasNewData(false);
-        setLoading(false)
     }, [hasNewData]);
 
     useEffect(() => {
@@ -77,6 +79,9 @@ function Dashboard(props) {
         const newClickCount = renderChart + 1 > 3 ? 1 : renderChart + 1;
         setRenderChart(newClickCount);
     };
+    if (!isLoggedIn) {
+        return <Navigate to="/sign-in" />;
+    }
     return (
         <>
             <div className="content">
@@ -97,14 +102,15 @@ function Dashboard(props) {
                         >
                             {t('chart')}
                         </button>
+                        { !loading &&
                         <button 
                             type="button"
                             onClick={() => setType('detail')}
                             class="btn btn-outline-success"
-                            disabled={loading}
                         >
                             {t('detail')}
                         </button>
+}
                     </ButtonGroup>
                 </div>
                 {type === 'chart' ? (

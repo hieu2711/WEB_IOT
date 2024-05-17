@@ -133,9 +133,12 @@ function Login() {
             setIsLoading(false)
         }
     };
-    if (isLoggedIn) {
-        return <Navigate to="/admin/dashboard" />;
-    }
+    useEffect(() => {
+        // Nếu đã đăng nhập, điều hướng đến trang quản trị
+        if (isLoggedIn) {
+            return <Navigate to="/admin/dashboard" />;
+        }
+    }, [isLoggedIn]);
     return (
         <div className="MuiBox-root css-19bmmkw">
             <div className="MuiContainer-root MuiContainer-maxWidthLg css-i57t81">

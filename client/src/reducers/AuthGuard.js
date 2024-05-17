@@ -7,7 +7,7 @@ function AuthGuard({ children }) {
 
     useEffect(() => {
         if (!isLoggedIn) {
-            window.location.href = '/sign-in';
+            return <Navigate to="/sign-in" />;
         }
     }, [isLoggedIn]);
 

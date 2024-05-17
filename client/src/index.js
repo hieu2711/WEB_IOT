@@ -9,6 +9,7 @@ import languageReducer from './reducers/languageSlice';
 import AdminLayout from 'layouts/Admin/Admin.js';
 import LoginLayout from 'layouts/Login/Login.js';
 import SignUpLayout from 'layouts/Register/Register.js';
+import AuthGuard from './reducers/AuthGuard';
 import 'assets/scss/black-dashboard-react.scss';
 
 import 'assets/demo/demo.css';
@@ -37,7 +38,7 @@ root.render(
                 <BrowserRouter>
                     <LanguageWatcher />
                     <Routes>
-                        <Route path="/admin/*" element={<AdminLayout />} />
+                        <Route path="/admin/*" element={<AuthGuard><AdminLayout /></AuthGuard>} />
                         <Route path="/sign-in" element={<LoginLayout />} />
                         <Route path="/sign-up" element={<SignUpLayout />} />
                         <Route

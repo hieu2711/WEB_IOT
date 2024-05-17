@@ -1,5 +1,4 @@
 import axios from 'axios';
-import cookie from 'react-cookies';
 const SERVER_CONTEXT = '/api/solar-air';
 export const SERVER = 'https://web-iot-server.onrender.com';
 export const endpoints = {

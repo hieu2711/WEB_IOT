@@ -19,6 +19,7 @@ function Dashboard(props) {
     const [renderChart, setRenderChart] = useState(1);
     const { t } = useTranslation();
     const language = useSelector((state) => state.language.language);
+    const [loading,setLoading] = useState(false)
     useEffect(() => {
         if (theme === 'white-content') {
             setAdditionalClass('additional-white-class');
@@ -34,6 +35,7 @@ function Dashboard(props) {
     }, [theme, type]);
 
     useEffect(() => {
+        setLoading(true)
         const loadInfo = async () => {
             let { data } = await authApi().get(endpoints['info']);
             setInfo(data);
@@ -52,6 +54,7 @@ function Dashboard(props) {
         loadInfo();
         loadDataColapse();
         setHasNewData(false);
+        setLoading(false)
     }, [hasNewData]);
 
     useEffect(() => {
@@ -94,10 +97,11 @@ function Dashboard(props) {
                         >
                             {t('chart')}
                         </button>
-                        <button
+                        <button 
                             type="button"
                             onClick={() => setType('detail')}
                             class="btn btn-outline-success"
+                            disabled={loading}
                         >
                             {t('detail')}
                         </button>

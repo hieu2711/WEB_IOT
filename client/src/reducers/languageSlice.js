@@ -1,8 +1,8 @@
-// reducers/languageSlice.js
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    language: 'en', // Ngôn ngữ mặc định
+    language: 'en',
 };
 
 const languageSlice = createSlice({

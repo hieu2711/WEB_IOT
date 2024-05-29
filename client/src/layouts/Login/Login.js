@@ -78,6 +78,8 @@ function Login() {
     };
 
     const handleGetOTP = async () => {
+        setIsLoading(true);
+        setLoginFail('');
         try {
             const response = await fetch(`${SERVER}/api/auth/loginemail`, {
                 method: 'POST',
@@ -98,6 +100,8 @@ function Login() {
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
+        }finally{
+            setIsLoading(false)
         }
     };
     const handleVerifyOTP = async () => {

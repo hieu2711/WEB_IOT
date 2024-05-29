@@ -42,6 +42,7 @@ function Login() {
     };
     const handleSignIn = async () => {
         setIsLoading(true);
+        setLoginFail('')
         try {
             const response = await fetch(`${SERVER}/api/auth/login`, {
                 method: 'POST',
@@ -342,6 +343,7 @@ function Login() {
                                             tabindex="0"
                                             type="button"
                                             onClick={handleSignInWithOTP}
+                                            disabled={isLoading}
                                         >
                                             {value
                                                 ? 'Đăng nhập với OTP'
@@ -417,6 +419,7 @@ function Login() {
                                             onClick={() => {
                                                 setType(true);
                                                 setGetOTP(true);
+                                                setLoginFail('');
                                             }}
                                         >
                                             {value ? 'Đăng nhập' : 'Sign in'}

@@ -14,7 +14,7 @@ function Chart({ data, number, commondata, renderChart }) {
     const language = useSelector((state) => state.language.language);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        setLoading(true); 
+        setLoading(true);
         const loadDataTemp = async () => {
             let { data } = await authApi().get(endpoints['chartTemp']);
             setDataTemp(data);
@@ -22,16 +22,18 @@ function Chart({ data, number, commondata, renderChart }) {
         };
 
         const loadDataNoise = async () => {
-            setLoading(true); 
+            setLoading(true);
             let { data } = await authApi().get(endpoints['chartPower']);
             setDataPower(data);
-            setLoading(false); 
+            setLoading(false);
         };
         loadDataTemp();
         loadDataNoise();
     }, [hasNewData]);
     useEffect(() => {
-        const eventSource = new EventSource('https://web-iot-server.onrender.com/api/sse');
+        const eventSource = new EventSource(
+            'https://web-iot-server.onrender.com/api/sse',
+        );
 
         eventSource.onmessage = function (event) {
             const newData = JSON.parse(event.data);
@@ -44,194 +46,197 @@ function Chart({ data, number, commondata, renderChart }) {
     }, []);
     return (
         <>
-         {loading ? ( 
-               <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-               <BeatLoader color='white' />
-           </div>
+            {loading ? (
+                <div
+                    className="d-flex justify-content-center align-items-center"
+                    style={{ height: '100vh' }}
+                >
+                    <BeatLoader color="white" />
+                </div>
             ) : (
                 <>
-            {renderChart === 1 && (
-                <>
-                    <Row>
-                        <Col xs="12">
-                            <ChartColapse
-                                data={commondata}
-                                unit1={'db'}
-                                unit2={'%'}
-                                value1={'humi'}
-                                value2={'noise'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Humidity and Noise chart'
-                                        : 'Biểu đồ độ ẩm và tiếng ồn'
-                                }
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg="4">
-                            <ChartLine
-                                data={dataPower}
-                                unit={'kW'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Power chart'
-                                        : 'Biểu đồ năng lượng'
-                                }
-                            />
-                        </Col>
-                        <Col lg="4">
-                            <ChartColumn
-                                data={dataTemp}
-                                unit={'°C'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Temperature chart'
-                                        : 'Biểu đồ nhiệt độ'
-                                }
-                            />
-                        </Col>
-                        <Col lg="4">
-                            <RoundChart
-                                number={number}
-                                data={dataTemp}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Air quality'
-                                        : 'Chỉ số không khí'
-                                }
-                            />
-                        </Col>
-                    </Row>
-                </>
-            )}
+                    {renderChart === 1 && (
+                        <>
+                            <Row>
+                                <Col xs="12">
+                                    <ChartColapse
+                                        data={commondata}
+                                        unit1={'db'}
+                                        unit2={'%'}
+                                        value1={'humi'}
+                                        value2={'noise'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Humidity and Noise chart'
+                                                : 'Biểu đồ độ ẩm và tiếng ồn'
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col lg="4">
+                                    <ChartLine
+                                        data={dataPower}
+                                        unit={'kW'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Power chart'
+                                                : 'Biểu đồ năng lượng'
+                                        }
+                                    />
+                                </Col>
+                                <Col lg="4">
+                                    <ChartColumn
+                                        data={dataTemp}
+                                        unit={'°C'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Temperature chart'
+                                                : 'Biểu đồ nhiệt độ'
+                                        }
+                                    />
+                                </Col>
+                                <Col lg="4">
+                                    <RoundChart
+                                        number={number}
+                                        data={dataTemp}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Air quality'
+                                                : 'Chỉ số không khí'
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                        </>
+                    )}
 
-            {renderChart === 2 && (
-                <>
-                    <Row>
-                        <Col xs="12">
-                            <ChartLine
-                                data={dataPower}
-                                unit={'kW'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Power chart'
-                                        : 'Biểu đồ năng lượng'
-                                }
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg="4">
-                            <ChartColumn
-                                data={dataTemp}
-                                unit={'°C'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Temperature chart'
-                                        : 'Biểu đồ nhiệt độ'
-                                }
-                            />
-                        </Col>
-                        <Col lg="4">
-                            <ChartColapse
-                                data={commondata}
-                                unit1={'db'}
-                                unit2={'%'}
-                                value1={'humi'}
-                                value2={'noise'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Humidity and Noise chart'
-                                        : 'Biểu đồ độ ẩm và tiếng ồn'
-                                }
-                            />
-                        </Col>
-                        <Col lg="4">
-                            <RoundChart
-                                number={number}
-                                data={dataTemp}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Air quality'
-                                        : 'Chỉ số không khí'
-                                }
-                            />
-                        </Col>
-                    </Row>
-                </>
-            )}
+                    {renderChart === 2 && (
+                        <>
+                            <Row>
+                                <Col xs="12">
+                                    <ChartLine
+                                        data={dataPower}
+                                        unit={'kW'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Power chart'
+                                                : 'Biểu đồ năng lượng'
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col lg="4">
+                                    <ChartColumn
+                                        data={dataTemp}
+                                        unit={'°C'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Temperature chart'
+                                                : 'Biểu đồ nhiệt độ'
+                                        }
+                                    />
+                                </Col>
+                                <Col lg="4">
+                                    <ChartColapse
+                                        data={commondata}
+                                        unit1={'db'}
+                                        unit2={'%'}
+                                        value1={'humi'}
+                                        value2={'noise'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Humidity and Noise chart'
+                                                : 'Biểu đồ độ ẩm và tiếng ồn'
+                                        }
+                                    />
+                                </Col>
+                                <Col lg="4">
+                                    <RoundChart
+                                        number={number}
+                                        data={dataTemp}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Air quality'
+                                                : 'Chỉ số không khí'
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                        </>
+                    )}
 
-            {renderChart === 3 && (
-                <>
-                    <Row>
-                        <Col xs="12">
-                            <ChartColumn
-                                data={dataTemp}
-                                unit={'°C'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Temperature chart'
-                                        : 'Biểu đồ nhiệt độ'
-                                }
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg="4">
-                            <ChartColapse
-                                data={commondata}
-                                unit1={'db'}
-                                unit2={'%'}
-                                value1={'humi'}
-                                value2={'noise'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Humidity and Noise chart'
-                                        : 'Biểu đồ độ ẩm và tiếng ồn'
-                                }
-                            />
-                        </Col>
-                        <Col lg="4">
-                            <ChartLine
-                                data={dataPower}
-                                unit={'kW'}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Power chart'
-                                        : 'Biểu đồ năng lượng'
-                                }
-                            />
-                        </Col>
-                        <Col lg="4">
-                            <RoundChart
-                                number={number}
-                                data={dataTemp}
-                                update={language}
-                                name={
-                                    language === 'en'
-                                        ? 'Air quality'
-                                        : 'Chỉ số không khí'
-                                }
-                            />
-                        </Col>
-                    </Row>
+                    {renderChart === 3 && (
+                        <>
+                            <Row>
+                                <Col xs="12">
+                                    <ChartColumn
+                                        data={dataTemp}
+                                        unit={'°C'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Temperature chart'
+                                                : 'Biểu đồ nhiệt độ'
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col lg="4">
+                                    <ChartColapse
+                                        data={commondata}
+                                        unit1={'db'}
+                                        unit2={'%'}
+                                        value1={'humi'}
+                                        value2={'noise'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Humidity and Noise chart'
+                                                : 'Biểu đồ độ ẩm và tiếng ồn'
+                                        }
+                                    />
+                                </Col>
+                                <Col lg="4">
+                                    <ChartLine
+                                        data={dataPower}
+                                        unit={'kW'}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Power chart'
+                                                : 'Biểu đồ năng lượng'
+                                        }
+                                    />
+                                </Col>
+                                <Col lg="4">
+                                    <RoundChart
+                                        number={number}
+                                        data={dataTemp}
+                                        update={language}
+                                        name={
+                                            language === 'en'
+                                                ? 'Air quality'
+                                                : 'Chỉ số không khí'
+                                        }
+                                    />
+                                </Col>
+                            </Row>
+                        </>
+                    )}
                 </>
             )}
         </>
-            )}
-            </>
     );
 }
 

@@ -20,14 +20,14 @@ function ListUser({ language }) {
     }, []);
 
     const fetchUsers = async () => {
-        setLoading(true)
+        setLoading(true);
         try {
             const { data } = await authApi().get('/api/user');
             setList(data);
         } catch (error) {
             console.error('Error', error);
         }
-        setLoading(false)
+        setLoading(false);
     };
     const handleDelete = async (userId) => {
         Swal.fire({
@@ -52,14 +52,14 @@ function ListUser({ language }) {
     const deleteUser = async (userId) => {
         try {
             const token = localStorage.getItem('token');
-            const user = JSON.parse(localStorage.getItem('user')); 
-            console.log(user.roles)
+            const user = JSON.parse(localStorage.getItem('user'));
+            console.log(user.roles);
             const response = await fetch(`${SERVER}/api/user?id=${userId}`, {
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Role': user.roles 
-                }
+                    Authorization: `Bearer ${token}`,
+                    Role: user.roles,
+                },
             });
             if (!response.ok) {
                 throw new Error('Failed to delete the user');
@@ -129,7 +129,7 @@ function ListUser({ language }) {
                                 )}
                             </tbody>
                         </Table>
-                        {loading && <BeatLoader color='white' />}
+                        {loading && <BeatLoader color="white" />}
                     </CardBody>
                 </Card>
             </Col>

@@ -54,15 +54,21 @@ function UserProfile() {
         }
     }, [user]);
     const handleUpdateUser = async () => {
-        setLoading(true)
-        if (/\s/.test(newPassword) || /\s/.test(confirmNewPassword) || /\s/.test(userName)) {
+        setLoading(true);
+        if (
+            /\s/.test(newPassword) ||
+            /\s/.test(confirmNewPassword) ||
+            /\s/.test(userName)
+        ) {
             Swal.fire({
-                text: language === 'en' ? 'Do not have spaces!' : 'Không được có khoảng trắng!',
+                text:
+                    language === 'en'
+                        ? 'Do not have spaces!'
+                        : 'Không được có khoảng trắng!',
                 icon: 'error',
             });
             return;
         }
-    
 
         if (newPassword !== confirmNewPassword) {
             const result = await Swal.fire(
@@ -84,11 +90,12 @@ function UserProfile() {
             email: email === '' ? user.email : email,
             password: newPassword,
             oldPassword: password,
-            language:language
+            language: language,
         };
         try {
             const response = await fetch(
-                'https://web-iot-server.onrender.com/api/user?id=' + user.userid,
+                'https://web-iot-server.onrender.com/api/user?id=' +
+                    user.userid,
                 {
                     method: 'PUT',
                     headers: {
@@ -126,7 +133,7 @@ function UserProfile() {
                 'error',
             );
         }
-        setLoading(false)
+        setLoading(false);
     };
     if (isLoading) {
         return <div>Loading...</div>;
@@ -169,9 +176,11 @@ function UserProfile() {
                                         </Col>
                                         <Col className="px-md-1" md="5">
                                             <FormGroup>
-                                                <label>{language === 'en'
+                                                <label>
+                                                    {language === 'en'
                                                         ? 'Username'
-                                                        : 'Tên đăng nhập'}</label>
+                                                        : 'Tên đăng nhập'}
+                                                </label>
                                                 <Input
                                                     placeholder="Username"
                                                     type="text"
@@ -301,7 +310,7 @@ function UserProfile() {
                                 >
                                     {language === 'en' ? 'Save' : 'Lưu'}
                                 </Button>
-                                {loading && <BeatLoader color='white' />}
+                                {loading && <BeatLoader color="white" />}
                             </CardFooter>
                         </Card>
                     </Col>

@@ -42,7 +42,7 @@ function Login() {
     };
     const handleSignIn = async () => {
         setIsLoading(true);
-        setLoginFail('')
+        setLoginFail('');
         try {
             const response = await fetch(`${SERVER}/api/auth/login`, {
                 method: 'POST',
@@ -72,7 +72,7 @@ function Login() {
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
-        } finally{
+        } finally {
             setIsLoading(false);
         }
     };
@@ -100,8 +100,8 @@ function Login() {
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
-        }finally{
-            setIsLoading(false)
+        } finally {
+            setIsLoading(false);
         }
     };
     const handleVerifyOTP = async () => {
@@ -134,8 +134,8 @@ function Login() {
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error.message);
             setLoginFail(error.message);
-        } finally{
-            setIsLoading(false)
+        } finally {
+            setIsLoading(false);
         }
     };
     if (isLoggedIn) {
@@ -409,7 +409,7 @@ function Login() {
                                             {value ? 'Đăng kí' : 'Sign up'}
                                         </Link>
                                     </span>
-                                    {isLoading && <BeatLoader color='white' />}
+                                    {isLoading && <BeatLoader color="white" />}
                                 </div>
                             ) : (
                                 <div className="MuiBox-root css-1xyaojc">
@@ -429,7 +429,7 @@ function Login() {
                                             {value ? 'Đăng nhập' : 'Sign in'}
                                         </Link>
                                     </span>
-                                    {isLoading && <BeatLoader color='white' />}
+                                    {isLoading && <BeatLoader color="white" />}
                                 </div>
                             )}
                         </form>

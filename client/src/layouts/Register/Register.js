@@ -21,7 +21,10 @@ function Register() {
     const handleRegister = async () => {
         if (/\s/.test(userName) || /\s/.test(email) || /\s/.test(password)) {
             Swal.fire({
-                text: language === 'en' ? 'Username, email, and password must not contain spaces in between!' : 'Tên đăng nhập, email, và mật khẩu không được chứa khoảng trắng ở giữa!',
+                text:
+                    language === 'en'
+                        ? 'Username, email, and password must not contain spaces in between!'
+                        : 'Tên đăng nhập, email, và mật khẩu không được chứa khoảng trắng ở giữa!',
                 icon: 'error',
             });
             return;
@@ -32,7 +35,10 @@ function Register() {
         const containsLetter = /[a-zA-Z]/.test(password);
         if (!containsNumber || !containsLetter || password.length < 6) {
             Swal.fire({
-                text: language === 'en' ? 'Passwords must contain at least 6 characters and include both letters and numbers!' : 'Mật khẩu phải chứa ít nhất 6 ký tự và bao gồm cả chữ cái và số!',
+                text:
+                    language === 'en'
+                        ? 'Passwords must contain at least 6 characters and include both letters and numbers!'
+                        : 'Mật khẩu phải chứa ít nhất 6 ký tự và bao gồm cả chữ cái và số!',
                 icon: 'error',
             });
             return;
@@ -42,7 +48,10 @@ function Register() {
         const containsLetterUser = /[a-zA-Z]/.test(userName);
         if (!containsLetterUser) {
             Swal.fire({
-                text: language === 'en' ? 'The username must contain letters!' : 'Tên người dùng phải chứa chữ cái!',
+                text:
+                    language === 'en'
+                        ? 'The username must contain letters!'
+                        : 'Tên người dùng phải chứa chữ cái!',
                 icon: 'error',
             });
             return;
@@ -75,7 +84,7 @@ function Register() {
         } catch (error) {
             console.error('Lỗi khi đăng kí:', error.message);
             setRegisterFail(error.message);
-        } finally{
+        } finally {
             setIsLoading(false);
         }
     };
@@ -297,7 +306,9 @@ function Register() {
                                                     : 'Sign in'}
                                             </Link>
                                         </span>
-                                        {isLoading && <BeatLoader color='white' />}
+                                        {isLoading && (
+                                            <BeatLoader color="white" />
+                                        )}
                                     </div>
                                 </form>
                             </div>

@@ -56,7 +56,7 @@ function Statistical() {
                 endpoints['tableDetailsMinAndMax'](info[0], info[1], info[2]),
             );
             setDataTable(dataTable.data);
-            setLoading(false); 
+            setLoading(false);
         }
 
         if (selectedMonth !== '' && selectedYear !== '') {
@@ -99,14 +99,13 @@ function Statistical() {
             );
             const monthData = dataCheckServer.data.monthData;
             setCheckServer(monthData);
-            setLoading(false); 
-            
+            setLoading(false);
+
             if (data && data.length > 0) {
                 setData(data);
             } else {
                 return;
             }
-            
         }
 
         if (selectedStartDay !== '' && selectedEndDay !== '') {
@@ -174,7 +173,7 @@ function Statistical() {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
@@ -511,94 +510,97 @@ function Statistical() {
                 </ButtonGroup>
             </div>
             {loading && type !== '' ? (
-            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-                <BeatLoader color='white' />
-            </div>
-        ) : (
-            <Row>
-                <Col className="mt-4" xs="12">
-                    {data && data.length > 0 ? (
-                        <ChartColumnAndLine
-                            data={data}
-                            unit1={'kW'}
-                            unit2={'%'}
+                <div
+                    className="d-flex justify-content-center align-items-center"
+                    style={{ height: '100vh' }}
+                >
+                    <BeatLoader color="white" />
+                </div>
+            ) : (
+                <Row>
+                    <Col className="mt-4" xs="12">
+                        {data && data.length > 0 ? (
+                            <ChartColumnAndLine
+                                data={data}
+                                unit1={'kW'}
+                                unit2={'%'}
+                                name={
+                                    language === 'en'
+                                        ? 'Energy statistics and humidity'
+                                        : 'Thống kê năng lượng và độ ẩm'
+                                }
+                                update={language}
+                            />
+                        ) : (
+                            <div></div>
+                        )}
+                    </Col>
+                    <Col lg="8">
+                        <ChartColapse
+                            data={dataColapse}
                             name={
                                 language === 'en'
-                                    ? 'Energy statistics and humidity'
-                                    : 'Thống kê năng lượng và độ ẩm'
+                                    ? 'Air and noise statistics'
+                                    : 'Thống kê không khí và tiếng ồn'
+                            }
+                            unit1={'kPa'}
+                            unit2={'dP'}
+                            value1={'noise'}
+                            value2={'atmosphere'}
+                            update={language}
+                        />
+                    </Col>
+                    <Col lg="4">
+                        <ChartColumn
+                            data={dataTemp}
+                            unit={'°C'}
+                            name={
+                                language === 'en'
+                                    ? 'Temperature statistics'
+                                    : 'Thống kê nhiệt độ'
                             }
                             update={language}
                         />
-                    ) : (
-                        <div></div>
-                    )}
-                </Col>
-                <Col lg="8">
-                    <ChartColapse
-                        data={dataColapse}
-                        name={
-                            language === 'en'
-                                ? 'Air and noise statistics'
-                                : 'Thống kê không khí và tiếng ồn'
-                        }
-                        unit1={'kPa'}
-                        unit2={'dP'}
-                        value1={'noise'}
-                        value2={'atmosphere'}
-                        update={language}
-                    />
-                </Col>
-                <Col lg="4">
-                    <ChartColumn
-                        data={dataTemp}
-                        unit={'°C'}
-                        name={
-                            language === 'en'
-                                ? 'Temperature statistics'
-                                : 'Thống kê nhiệt độ'
-                        }
-                        update={language}
-                    />
-                </Col>
+                    </Col>
 
-                {data && data.length > 0 ? (
-                    <>
-                        {type === 'Month' && (
-                            <Col className="mt-4" xs="12">
-                                <ChartCheckServer
-                                    data={checkServer}
-                                    unit={'error'}
+                    {data && data.length > 0 ? (
+                        <>
+                            {type === 'Month' && (
+                                <Col className="mt-4" xs="12">
+                                    <ChartCheckServer
+                                        data={checkServer}
+                                        unit={'error'}
+                                        name={
+                                            language === 'en'
+                                                ? 'System statistics error'
+                                                : 'Thống kê hệ thống khi xảy ra lỗi'
+                                        }
+                                        update={language}
+                                    />
+                                </Col>
+                            )}
+                            <Col lg="12" md="12">
+                                <TableContent
+                                    value={'Value'}
+                                    valueMin={'MIN'}
+                                    valueMax={'MAX'}
+                                    unit={'Unit'}
+                                    data={dataTable}
                                     name={
                                         language === 'en'
-                                            ? 'System statistics error'
-                                            : 'Thống kê hệ thống khi xảy ra lỗi'
+                                            ? 'Statistical tables'
+                                            : 'Bảng thống kê chi tiết'
                                     }
-                                    update={language}
                                 />
                             </Col>
-                        )}
-                        <Col lg="12" md="12">
-                            <TableContent
-                                value={'Value'}
-                                valueMin={'MIN'}
-                                valueMax={'MAX'}
-                                unit={'Unit'}
-                                data={dataTable}
-                                name={
-                                    language === 'en'
-                                        ? 'Statistical tables'
-                                        : 'Bảng thống kê chi tiết'
-                                }
-                            />
-                        </Col>
-                    </>
-                ) : (
-                    <h3 className="text-warning mt-4 mx-auto d-block w-50 text-center">
-                        {t('noData')}
-                    </h3>
-                )}
-            </Row>
-        )}
+                        </>
+                    ) : (
+                        <h3 className="text-warning mt-4 mx-auto d-block w-50 text-center">
+                            {t('noData')}
+                        </h3>
+                    )}
+                </Row>
+            )}
         </div>
     );
 }

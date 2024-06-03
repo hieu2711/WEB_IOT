@@ -20,7 +20,7 @@ function Dashboard(props) {
     const [renderChart, setRenderChart] = useState(1);
     const { t } = useTranslation();
     const language = useSelector((state) => state.language.language);
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     useEffect(() => {
         if (theme === 'white-content') {
@@ -37,7 +37,7 @@ function Dashboard(props) {
     }, [theme, type]);
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         const loadInfo = async () => {
             let { data } = await authApi().get(endpoints['info']);
             setInfo(data);
@@ -45,7 +45,7 @@ function Dashboard(props) {
                 (item) => item.sensors_name === 'atmosphere_0001',
             );
             setNumber(Math.floor(number[0].sensors_value));
-            setLoading(false)
+            setLoading(false);
         };
 
         const loadDataColapse = async () => {
@@ -53,7 +53,7 @@ function Dashboard(props) {
                 endpoints['chartPowerAndHudmityTop10'],
             );
             setDataColapse(data);
-            setLoading(false)
+            setLoading(false);
         };
         loadInfo();
         loadDataColapse();
@@ -61,12 +61,18 @@ function Dashboard(props) {
     }, [hasNewData]);
 
     useEffect(() => {
-        const eventSource = new EventSource('https://web-iot-server.onrender.com/api/sse');
+        const eventSource = new EventSource(
+            'https://web-iot-server.onrender.com/api/sse',
+        );
 
         eventSource.onmessage = function (event) {
             const newData = JSON.parse(event.data);
-            const message = language === 'en' ? 'Data has been updated!' : 'Dữ liệu đã được cập nhật!';
-            const title = language === 'en' ? 'Updating data' : 'Cập nhật dữ liệu';
+            const message =
+                language === 'en'
+                    ? 'Data has been updated!'
+                    : 'Dữ liệu đã được cập nhật!';
+            const title =
+                language === 'en' ? 'Updating data' : 'Cập nhật dữ liệu';
             Swal.fire(title, message, 'success');
             setHasNewData(true);
         };
@@ -103,15 +109,15 @@ function Dashboard(props) {
                         >
                             {t('chart')}
                         </button>
-                        { !loading &&
-                        <button 
-                            type="button"
-                            onClick={() => setType('detail')}
-                            class="btn btn-outline-success"
-                        >
-                            {t('detail')}
-                        </button>
-}
+                        {!loading && (
+                            <button
+                                type="button"
+                                onClick={() => setType('detail')}
+                                class="btn btn-outline-success"
+                            >
+                                {t('detail')}
+                            </button>
+                        )}
                     </ButtonGroup>
                 </div>
                 {type === 'chart' ? (

@@ -22,10 +22,13 @@ function AddUser() {
     const language = useSelector((state) => state.language.language);
     const [loading, setLoading] = useState(false);
     const handleRegister = async () => {
-        setLoading(true)
+        setLoading(true);
         if (/\s/.test(userName) || /\s/.test(email)) {
             Swal.fire({
-                text: language === 'en' ? 'Username, email must not contain spaces in between!' : 'Tên đăng nhập, email không được chứa khoảng trắng ở giữa!',
+                text:
+                    language === 'en'
+                        ? 'Username, email must not contain spaces in between!'
+                        : 'Tên đăng nhập, email không được chứa khoảng trắng ở giữa!',
                 icon: 'error',
             });
             return;
@@ -72,7 +75,7 @@ function AddUser() {
                 'error',
             );
         }
-        setLoading(false)
+        setLoading(false);
     };
     return (
         <>
@@ -173,7 +176,7 @@ function AddUser() {
                             >
                                 {language === 'en' ? 'Add' : 'Thêm'}
                             </Button>
-                            {loading && <BeatLoader color='white' />}
+                            {loading && <BeatLoader color="white" />}
                         </CardFooter>
                     </Card>
                 </Col>

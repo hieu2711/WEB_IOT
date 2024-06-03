@@ -37,19 +37,7 @@ const userController = {
                 }
             });
 
-              //kiểm tra mật khẩu mạnh
-             // Kiểm tra xem mật khẩu có ít nhất 6 ký tự không
-        if (password.length < 6) {
-            return res.status(400).json({ error: language === 'en' ? 'Password must be at least 6 characters long!' : 'Mật khẩu phải có ít nhất 6 ký tự!' });
-        }
-
-        // Kiểm tra xem mật khẩu có ít nhất một số và một chữ cái không
-        const containsNumber = /\d/.test(password);
-        const containsLetter = /[a-zA-Z]/.test(password);
-        if (!containsNumber || !containsLetter) {
-            return res.status(400).json({ error: language === 'en' ? 'Passwords must contain both words and numbers!' : 'Mật khẩu phải chứa cả chữ và số!' });
-        }
-
+            
         // Kiểm tra xem username có chứa ít nhất một chữ cái không
         const containsLetterUser = /[a-zA-Z]/.test(username);
         if (!containsLetterUser) {
@@ -74,6 +62,18 @@ const userController = {
     
             // Kiểm tra xem người dùng đã truyền mật khẩu mới vào hay không
             if (password) {
+                 //kiểm tra mật khẩu mạnh
+             // Kiểm tra xem mật khẩu có ít nhất 6 ký tự không
+        if (password.length < 6) {
+            return res.status(400).json({ error: language === 'en' ? 'Password must be at least 6 characters long!' : 'Mật khẩu phải có ít nhất 6 ký tự!' });
+        }
+
+        // Kiểm tra xem mật khẩu có ít nhất một số và một chữ cái không
+        const containsNumber = /\d/.test(password);
+        const containsLetter = /[a-zA-Z]/.test(password);
+        if (!containsNumber || !containsLetter) {
+            return res.status(400).json({ error: language === 'en' ? 'Passwords must contain both words and numbers!' : 'Mật khẩu phải chứa cả chữ và số!' });
+        }
                 // Kiểm tra xem mật khẩu mới có giống mật khẩu cũ không
                 const isSamePassword = await bcrypt.compare(password, currentUser.password);
                 if (isSamePassword) {

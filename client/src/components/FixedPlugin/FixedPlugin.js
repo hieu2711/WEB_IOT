@@ -23,7 +23,11 @@ function FixedPlugin(props) {
                     <i className="fa fa-cog fa-2x" />
                 </DropdownToggle>
                 <ul className="dropdown-menu show">
-                    <li className="header-title">{language === 'en' ? 'SIDEBAR BACKGROUND' : 'MÀU NỀN THANH BÊN'}</li>
+                    <li className="header-title">
+                        {language === 'en'
+                            ? 'SIDEBAR BACKGROUND'
+                            : 'MÀU NỀN THANH BÊN'}
+                    </li>
                     <li className="adjustments-line">
                         <div className="badge-colors text-center">
                             <Badge
@@ -68,7 +72,9 @@ function FixedPlugin(props) {
                             {({ changeTheme }) => (
                                 <>
                                     <span className="color-label">
-                                    {language == 'en' ? 'LIGHT MODE' : 'NỀN SÁNG'}
+                                        {language == 'en'
+                                            ? 'LIGHT MODE'
+                                            : 'NỀN SÁNG'}
                                     </span>{' '}
                                     <Badge
                                         className="light-badge mr-2"
@@ -81,18 +87,22 @@ function FixedPlugin(props) {
                                         onClick={() => changeTheme(themes.dark)}
                                     />{' '}
                                     <span className="color-label">
-                                    {language == 'en' ? 'DARK MODE' : 'NỀN TỐI'}
+                                        {language == 'en'
+                                            ? 'DARK MODE'
+                                            : 'NỀN TỐI'}
                                     </span>{' '}
                                 </>
                             )}
                         </ThemeContext.Consumer>
                     </li>
                     <li className="adjustments-line text-center color-change">
-                    <ThemeContext.Consumer>
+                        <ThemeContext.Consumer>
                             {({ changeTheme }) => (
                                 <>
                                     <span className="color-label">
-                                    {language == 'en' ? 'VIETNAMESE' : 'Tiếng Việt'}
+                                        {language == 'en'
+                                            ? 'VIETNAMESE'
+                                            : 'Tiếng Việt'}
                                     </span>{' '}
                                     <Badge
                                         className="light-badge mr-3"
@@ -102,7 +112,11 @@ function FixedPlugin(props) {
                                         className="dark-badge"
                                         onClick={() => changeLanguages('en')}
                                     />{' '}
-                                    <span className="color-label mr-3">{language == 'en' ? 'ENGLISH' : 'Tiếng Anh'}</span>{' '}
+                                    <span className="color-label mr-3">
+                                        {language == 'en'
+                                            ? 'ENGLISH'
+                                            : 'Tiếng Anh'}
+                                    </span>{' '}
                                 </>
                             )}
                         </ThemeContext.Consumer>

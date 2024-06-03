@@ -21,24 +21,23 @@ function ChartCheckServer({ data, name, unit, update }) {
         return <div>Loading...</div>;
     }
     const chartData = {
-        labels: data.map(item => item.day),
+        labels: data.map((item) => item.day),
         datasets: [
             {
                 label: unit,
                 fill: true,
                 backgroundColor: gradientStroke,
                 hoverBackgroundColor: gradientStroke,
-                borderColor: data.map(item => item.hasFalseFlag ? '#A52A2A' : '#20B2AA'),
+                borderColor: data.map((item) =>
+                    item.hasFalseFlag ? '#A52A2A' : '#20B2AA',
+                ),
                 borderWidth: 2,
                 borderDash: [],
                 borderDashOffset: 0.0,
-                data: data.map(item => item.hasFalseFlag ? 1 : 1),
+                data: data.map((item) => (item.hasFalseFlag ? 1 : 1)),
             },
         ],
     };
-    
-    
-    
 
     const options = {
         maintainAspectRatio: false,
@@ -64,11 +63,11 @@ function ChartCheckServer({ data, name, unit, update }) {
     const handleZoomIn = () => {
         setZoomScale(zoomScale * 1.1);
     };
-    
+
     const handleZoomOut = () => {
         setZoomScale(zoomScale * 0.9);
     };
-    
+
     const handleResetZoom = () => {
         setZoomScale(1);
     };
@@ -76,15 +75,33 @@ function ChartCheckServer({ data, name, unit, update }) {
     const handleMouseLeave = () => {
         handleResetZoom();
     };
-    console.log(isHovered)
+    console.log(isHovered);
     return (
         <Card className="card-chart">
             <CardHeader>
-                <div className='d-flex justify-content-between'>
+                <div className="d-flex justify-content-between">
                     <div>
-                        <span style={{fontSize:'1.3rem', cursor: 'pointer'}} onClick={handleZoomIn} className="material-icons">zoom_in</span>
-                        <span style={{fontSize:'1.3rem', cursor: 'pointer'}} onClick={handleZoomOut} className="material-icons">zoom_out</span>
-                        <span style={{fontSize:'1.3rem', cursor: 'pointer'}} onClick={handleResetZoom} className="material-icons">zoom_out_map</span>
+                        <span
+                            style={{ fontSize: '1.3rem', cursor: 'pointer' }}
+                            onClick={handleZoomIn}
+                            className="material-icons"
+                        >
+                            zoom_in
+                        </span>
+                        <span
+                            style={{ fontSize: '1.3rem', cursor: 'pointer' }}
+                            onClick={handleZoomOut}
+                            className="material-icons"
+                        >
+                            zoom_out
+                        </span>
+                        <span
+                            style={{ fontSize: '1.3rem', cursor: 'pointer' }}
+                            onClick={handleResetZoom}
+                            className="material-icons"
+                        >
+                            zoom_out_map
+                        </span>
                     </div>
                 </div>
                 <CardTitle tag="h3">
@@ -92,13 +109,25 @@ function ChartCheckServer({ data, name, unit, update }) {
                 </CardTitle>
             </CardHeader>
             <CardBody style={{ minHeight: '250px' }}>
-                <div className="chart-area" style={{ height: '100%', overflow: 'hidden' }} onMouseLeave={handleMouseLeave}>
+                <div
+                    className="chart-area"
+                    style={{ height: '100%', overflow: 'hidden' }}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <div
-                        style={{ transform: `scale(${zoomScale})`, transition: 'transform 0.1s ease-in-out' }}
+                        style={{
+                            transform: `scale(${zoomScale})`,
+                            transition: 'transform 0.1s ease-in-out',
+                        }}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                     >
-                        <Bar style={{ height: '220px' }} data={chartData} options={options} plugins={[ChartDataLabels]} />
+                        <Bar
+                            style={{ height: '220px' }}
+                            data={chartData}
+                            options={options}
+                            plugins={[ChartDataLabels]}
+                        />
                     </div>
                 </div>
             </CardBody>

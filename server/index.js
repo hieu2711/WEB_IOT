@@ -145,9 +145,6 @@ function fetchDataFromDatabase() {
             if (JSON.stringify(result) !== JSON.stringify(newData)) {
                 newData = result;
                 sendSSEDataToClients(newData);
-                // Gửi dữ liệu qua SSE nếu có sự thay đổi
-                // Gọi lại API từ phía frontend để lấy dữ liệu mới
-                // Thêm mã ở đây để gọi lại API từ frontend
             }
         }
     });

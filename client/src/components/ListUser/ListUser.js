@@ -51,8 +51,15 @@ function ListUser({ language }) {
     };
     const deleteUser = async (userId) => {
         try {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user')); 
+            console.log(user.roles)
             const response = await fetch(`${SERVER}/api/user?id=${userId}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Role': user.roles 
+                }
             });
             if (!response.ok) {
                 throw new Error('Failed to delete the user');

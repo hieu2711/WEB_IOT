@@ -32,21 +32,26 @@ const brokerPassword = 'Innovation_RgPQAZoA5N';
 const topic = '/innovation/airmonitoring/WSNs';
 const CLIENT_ID = 'innovation';
 const CLEAN_SESSION = true;
+const KEEP_ALIVE_INTERVAL = 60;
 
 const client = mqtt.connect(brokerUrl, {
-    host: brokerUrl,
     port: brokerPort,
     username: brokerUsername,
     password: brokerPassword,
     clientId: CLIENT_ID,
     clean: CLEAN_SESSION,
+    keepalive: KEEP_ALIVE_INTERVAL, // Thêm keep-alive
+    reconnectPeriod: 1000, // Tự động kết nối lại sau 1 giây nếu mất kết nối
+    connectTimeout: 30 * 1000, // Thời gian chờ kết nối là 30 giây
 });
 
-client.on('connect', function () {
-    console.log('Connected to MQTT broker');
-    client.subscribe(topic, function (err) {
-        if (!err) {
-            console.log('Subscribed to', topic);
+client.on('connect', () => {
+    console.log('Connected to broker');
+    client.subscribe(topic, (err) => {
+        if (err) {
+            console.error('Failed to subscribe:', err);
+        } else {
+            console.log(`Subscribed to ${topic}`);
         }
     });
 });

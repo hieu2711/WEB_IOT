@@ -24,7 +24,6 @@ const { checkAndSaveData, saveDataToDatabase } = require("../server/controllers/
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
 app.use(cors({
     origin: 'https://web-iot-client.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],

@@ -34,6 +34,7 @@ function UserProfile() {
     const language = useSelector((state) => state.language.language);
     const [loading, setLoading] = useState(false);
     const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const token = localStorage.getItem('token');
     useEffect(() => {
         const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
         if (userFromLocalStorage) {

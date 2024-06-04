@@ -75,7 +75,13 @@ client.on('message', async (topic, receivedMessage) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+
+app.use(cors({
+    origin: 'https://web-iot-client.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Role']
+}));
 
 function sendSSEData(data) {
     sseClients.forEach(client => {
@@ -516,7 +522,7 @@ app.get('/api/solar-air/bieudonangluongvadoamTKChiTiet', async (req, res) => {
                 DATE_FORMAT(sensors_datetime, '%Y-%m-%d %H:%i:%s'), sensors_datetime
             ORDER BY
                 sensors_datetime DESC
-            LIMIT 12
+            LIMIT 10
         ) AS subquery
         ORDER BY
             date ASC;    

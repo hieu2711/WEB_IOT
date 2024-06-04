@@ -21,6 +21,10 @@ const authRoute = require("../server/routes/auth");
 const userRoute = require("../server/routes/user");
 require('dotenv').config();
 const { checkAndSaveData, saveDataToDatabase } = require("../server/controllers/utils");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: 'mysql'
@@ -72,11 +76,6 @@ client.on('message', async (topic, receivedMessage) => {
         // Xử lý lỗi ở đây
     }
 });
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.use(cors());
 
 function sendSSEData(data) {
     sseClients.forEach(client => {

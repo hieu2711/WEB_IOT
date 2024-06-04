@@ -73,5 +73,6 @@
   },
   "overrides": {
     "svgo": "3.0.2"
-  }
+  },
+  "proxy": "https://web-iot-server.onrender.com"
 }

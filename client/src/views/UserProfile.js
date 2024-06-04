@@ -100,8 +100,6 @@ function UserProfile() {
                 {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Role': user.roles,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(userData),

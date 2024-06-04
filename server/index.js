@@ -76,12 +76,7 @@ client.on('message', async (topic, receivedMessage) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(cors({
-    origin: 'https://web-iot-client.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'Role']
-}));
+app.use(cors());
 
 function sendSSEData(data) {
     sseClients.forEach(client => {

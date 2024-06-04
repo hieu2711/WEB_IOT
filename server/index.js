@@ -22,13 +22,9 @@ const userRoute = require("../server/routes/user");
 require('dotenv').config();
 const { checkAndSaveData, saveDataToDatabase } = require("../server/controllers/utils");
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({
-    origin: 'https://web-iot-client.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-}));
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: 'mysql'

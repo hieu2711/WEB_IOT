@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const mqtt = require('mqtt');
 const app = express();
-const port = 1104;
+const port = 1004;
 const saltRounds = 10;
 const secretKey = 'your_secret_key';
 let sseClients = [];
@@ -29,53 +29,53 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     host: process.env.DB_HOST,
     dialect: 'mysql'
 });
-const brokerUrl = 'mqtt://mqttserver.tk';
-const brokerPort = 1883;
-const brokerUsername = 'innovation';
-const brokerPassword = 'Innovation_RgPQAZoA5N';
-const topic = '/innovation/airmonitoring/WSNs';
-const CLIENT_ID = 'innovation';
-const CLEAN_SESSION = true;
-const KEEP_ALIVE_INTERVAL = 60;
+// const brokerUrl = 'mqtt://mqttserver.tk';
+// const brokerPort = 1883;
+// const brokerUsername = 'innovation';
+// const brokerPassword = 'Innovation_RgPQAZoA5N';
+// const topic = '/innovation/airmonitoring/WSNs';
+// const CLIENT_ID = 'innovation';
+// const CLEAN_SESSION = true;
+// const KEEP_ALIVE_INTERVAL = 60;
 
-const client = mqtt.connect(brokerUrl, {
-    port: brokerPort,
-    username: brokerUsername,
-    password: brokerPassword,
-    clientId: CLIENT_ID,
-    clean: CLEAN_SESSION,
-    keepalive: KEEP_ALIVE_INTERVAL, // Thêm keep-alive
-    reconnectPeriod: 1000, // Tự động kết nối lại sau 1 giây nếu mất kết nối
-    connectTimeout: 30 * 1000, // Thời gian chờ kết nối là 30 giây
-});
+// const client = mqtt.connect(brokerUrl, {
+//     port: brokerPort,
+//     username: brokerUsername,
+//     password: brokerPassword,
+//     clientId: CLIENT_ID,
+//     clean: CLEAN_SESSION,
+//     keepalive: KEEP_ALIVE_INTERVAL, // Thêm keep-alive
+//     reconnectPeriod: 1000, // Tự động kết nối lại sau 1 giây nếu mất kết nối
+//     connectTimeout: 30 * 1000, // Thời gian chờ kết nối là 30 giây
+// });
 
-client.on('connect', () => {
-    console.log('Connected to broker');
-    client.subscribe(topic, (err) => {
-        if (err) {
-            console.error('Failed to subscribe:', err);
-        } else {
-            console.log(`Subscribed to ${topic}`);
-        }
-    });
-});
+// client.on('connect', () => {
+//     console.log('Connected to broker');
+//     client.subscribe(topic, (err) => {
+//         if (err) {
+//             console.error('Failed to subscribe:', err);
+//         } else {
+//             console.log(`Subscribed to ${topic}`);
+//         }
+//     });
+// });
 
-client.on('message', async (topic, receivedMessage) => {
-    const messageString = receivedMessage.toString();
+// client.on('message', async (topic, receivedMessage) => {
+//     const messageString = receivedMessage.toString();
 
-    try {
-        const jsonStringWithDoubleQuotes = messageString.replace(/'/g, '"');
-        const messageJSON = JSON.parse(jsonStringWithDoubleQuotes);
-        console.log(`Received JSON message on topic ${topic}:`, messageJSON);
-        // Xử lý thông điệp JSON ở đây
-        const check = await checkAndSaveData(messageJSON); // Chờ hàm này hoàn thành trước khi tiếp tục
-        console.log(check)
-        await saveDataToDatabase(messageJSON, check); // Chờ hàm này hoàn thành trước khi tiếp tục
-    } catch (error) {
-        console.error('Lỗi khi phân tích JSON:', error);
-        // Xử lý lỗi ở đây
-    }
-});
+//     try {
+//         const jsonStringWithDoubleQuotes = messageString.replace(/'/g, '"');
+//         const messageJSON = JSON.parse(jsonStringWithDoubleQuotes);
+//         console.log(`Received JSON message on topic ${topic}:`, messageJSON);
+//         // Xử lý thông điệp JSON ở đây
+//         const check = await checkAndSaveData(messageJSON); // Chờ hàm này hoàn thành trước khi tiếp tục
+//         console.log(check)
+//         await saveDataToDatabase(messageJSON, check); // Chờ hàm này hoàn thành trước khi tiếp tục
+//     } catch (error) {
+//         console.error('Lỗi khi phân tích JSON:', error);
+//         // Xử lý lỗi ở đây
+//     }
+// });
 
 function sendSSEData(data) {
     sseClients.forEach(client => {
@@ -1110,5 +1110,440 @@ app.get('/api/print_month_result', (req, res) => {
         // Xử lý lỗi nếu có
         console.error(err);
         res.status(500).json({ message: 'Lỗi server' });
+    }
+});
+
+// Hàm để tính toán min, max và xu hướng (tăng/giảm) và mức an toàn
+function analyzeAttribute(attributesTrend, safe, safeRanges) {
+    let isIncreasing = true;
+    let isDecreasing = true;
+    let isSafe = false;
+    let comment = "";
+
+    if (attributesTrend.length === 0 && safe.length === 0) {
+        return { trend: "empty", isSafe: false, comment: "no data" };
+    }
+
+    // Check the trend (increase, decrease, or no change)
+    for (let i = 1; i < attributesTrend.length; i++) {
+        const currentValue = attributesTrend[i];
+        const previousValue = attributesTrend[i - 1];
+
+        if (currentValue < previousValue) {
+            isIncreasing = false;
+        } else if (currentValue > previousValue) {
+            isDecreasing = false;
+        }
+    }
+
+    // Adjust trend based on no change scenario
+    let trend;
+    if (isIncreasing && isDecreasing) {
+        trend = "Không thay đổi";
+    } else if (isIncreasing) {
+        trend = "Tăng";
+    } else if (isDecreasing) {
+        trend = "Giảm";
+    } else {
+        trend = "Không thay đổi";
+    }
+
+    // Find the appropriate safe state and advice from safeRanges
+    const { stateVi, stateEn, adviceVi, adviceEn } = safeRanges.find(range => {
+        return safe.every(value => !(value < range.min || value > range.max));
+    }) || {};
+
+    // Check safety and set comment and isSafe
+    for (let i = 0; i < safe.length; i++) {
+        const value = safe[i];
+        for (const range of safeRanges) {
+            if (value >= range.min && value <= range.max) {
+                comment = range.comment;
+                if (range.isSafe) {
+                    isSafe = true;
+                }
+                break;
+            }
+        }
+    }
+
+    // Return the analyzed attribute with trend, safety information, advice, and value
+    return { trend, isSafe, comment, stateVi, stateEn, adviceVi, adviceEn, value: attributesTrend[attributesTrend.length - 1] };
+}
+
+
+const runQuery = (query) => {
+    return new Promise((resolve, reject) => {
+        db.query(query, (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(results);
+        });
+    });
+};
+
+// Định tuyến để lấy dữ liệu từ MySQL và trả về phân tích các thuộc tính
+app.get('/attributes', async (req, res) => {
+    try {
+        const query1 = `SELECT * FROM sensors WHERE sensors_name IN ('noise_0001', 'temp_0001', 'humi_0001', 'illuminance_0001', 'atmosphere_0001', 'CO2_0001', 'Nito_0002', 'Photpho_0002', 'Kali_0002') ORDER BY sensors_id DESC LIMIT 18;`;
+        const query2 = `SELECT * FROM sensors WHERE sensors_name IN ('noise_0001', 'temp_0001', 'humi_0001', 'illuminance_0001', 'atmosphere_0001', 'CO2_0001', 'Nito_0002', 'Photpho_0002', 'Kali_0002') ORDER BY sensors_id DESC LIMIT 9;`;
+
+        const results1 = await runQuery(query1);
+        const results2 = await runQuery(query2);
+
+        // Nhóm các giá trị theo thuộc tính
+
+        const trends = {};
+        results1.reverse().forEach(row => {
+            if (!trends[row.sensors_name]) {
+                trends[row.sensors_name] = [];
+            }
+            trends[row.sensors_name].push(row.sensors_value);
+        });
+
+        const safe = {};
+        results2.forEach(row => {
+            if (!safe[row.sensors_name]) {
+                safe[row.sensors_name] = [];
+            }
+            safe[row.sensors_name].push(row.sensors_value);
+        });
+
+       
+
+        const safeRanges = {
+            noise_0001: [
+                { 
+                    min: 0, max: 20, 
+                    stateVi: "Rất yên tĩnh", stateEn: "Very quiet", 
+                    isSafe: true, 
+                    adviceVi: "Thoải mái thư giãn.", adviceEn: "Relax comfortably."
+                },
+                { 
+                    min: 20, max: 40, 
+                    stateVi: "Yên tĩnh", stateEn: "Quiet", 
+                    isSafe: true, 
+                    adviceVi: "Tốt cho làm việc và học tập.", adviceEn: "Good for working and studying."
+                },
+                { 
+                    min: 40, max: 60, 
+                    stateVi: "Trung bình", stateEn: "Average", 
+                    isSafe: true, 
+                    adviceVi: "Phù hợp cho hoạt động hàng ngày.", adviceEn: "Suitable for daily activities."
+                },
+                { 
+                    min: 60, max: 70, 
+                    stateVi: "Khá ồn", stateEn: "Quite noisy", 
+                    isSafe: false, 
+                    adviceVi: "Cần hạn chế thời gian tiếp xúc.", adviceEn: "Limit exposure time."
+                },
+                { 
+                    min: 70, max: 80, 
+                    stateVi: "Rất ồn", stateEn: "Very noisy", 
+                    isSafe: false, 
+                    adviceVi: "Sử dụng bảo vệ thính giác khi cần thiết.", adviceEn: "Use hearing protection if necessary."
+                },
+                { 
+                    min: 80, max: 90, 
+                    stateVi: "Cực kỳ ồn", stateEn: "Extremely noisy", 
+                    isSafe: false, 
+                    adviceVi: "Cần hạn chế tiếp xúc và sử dụng bảo vệ thính giác.", adviceEn: "Limit exposure and use hearing protection."
+                },
+                { 
+                    min: 90, max: 100, 
+                    stateVi: "Gây khó chịu", stateEn: "Discomforting", 
+                    isSafe: false, 
+                    adviceVi: "Sử dụng bảo vệ thính giác và hạn chế tiếp xúc.", adviceEn: "Use hearing protection and limit exposure."
+                },
+                { 
+                    min: 100, max: 120, 
+                    stateVi: "Gây đau đớn", stateEn: "Painful", 
+                    isSafe: false, 
+                    adviceVi: "Cần ngay lập tức giảm thiểu tiếp xúc.", adviceEn: "Immediately minimize exposure."
+                },
+                { 
+                    min: 120, max: Infinity, 
+                    stateVi: "Gây tổn thương", stateEn: "Causing damage", 
+                    isSafe: false, 
+                    adviceVi: "Nguy hiểm cho thính giác và sức khỏe.", adviceEn: "Dangerous to hearing and health."
+                }
+            ],
+            temp_0001: [
+                { 
+                    min: -Infinity, max: 10, 
+                    stateVi: "Cực lạnh", stateEn: "Extremely cold", 
+                    isSafe: false, 
+                    adviceVi: "Mặc ấm và ở trong nhà.", adviceEn: "Dress warmly and stay indoors."
+                },
+                { 
+                    min: 10, max: 25, 
+                    stateVi: "Lạnh", stateEn: "Cold", 
+                    isSafe: true, 
+                    adviceVi: "Phù hợp cho hầu hết các hoạt động ngoài trời.", adviceEn: "Suitable for most outdoor activities."
+                },
+                { 
+                    min: 25, max: 35, 
+                    stateVi: "Mát mẻ", stateEn: "Cool", 
+                    isSafe: true, 
+                    adviceVi: "Thoải mái khi ra ngoài.", adviceEn: "Comfortable when going outside."
+                },
+                { 
+                    min: 35, max: 45, 
+                    stateVi: "Hơi nóng", stateEn: "Heat", 
+                    isSafe: true, 
+                    adviceVi: "Không dễ chịu và thoải mái.", adviceEn: "No comfortable and cozy."
+                },
+                { 
+                    min: 45, max: 60, 
+                    stateVi: "Nóng", stateEn: "Hot", 
+                    isSafe: true, 
+                    adviceVi: "Cần uống nhiều nước và tránh nắng gắt.", adviceEn: "Drink plenty of water and avoid intense sunlight."
+                },
+                { 
+                    min: 60, max: 100, 
+                    stateVi: "Rất nóng", stateEn: "Very hot", 
+                    isSafe: false, 
+                    adviceVi: "Cần giảm thiểu thời gian ra ngoài nếu có thể.", adviceEn: "Minimize outdoor exposure if possible."
+                },
+                { 
+                    min: 100, max: Infinity, 
+                    stateVi: "Nguy hiểm", stateEn: "Dangerous", 
+                    isSafe: false, 
+                    adviceVi: "Nguy hiểm cho sức khỏe, cần ngay lập tức giảm nhiệt độ cơ thể.", adviceEn: "Dangerous to health, immediately reduce body temperature."
+                }
+            ],
+            humi_0001: [
+                { 
+                    min: 0, max: 30, 
+                    stateVi: "Khô", stateEn: "Dry", 
+                    isSafe: false, 
+                    adviceVi: "Duy trì độ ẩm cho cơ thể và môi trường.", adviceEn: "Maintain moisture for body and environment."
+                },
+                { 
+                    min: 30, max: 60, 
+                    stateVi: "Thoải mái", stateEn: "Comfortable", 
+                    isSafe: true, 
+                    adviceVi: "Tốt cho sức khỏe.", adviceEn: "Good for health."
+                },
+                { 
+                    min: 60, max: 80, 
+                    stateVi: "Ẩm", stateEn: "Humid", 
+                    isSafe: false, 
+                    adviceVi: "Kiểm soát độ ẩm để tránh các vấn đề sức khỏe.", adviceEn: "Control humidity to avoid health issues."
+                },
+                { 
+                    min: 80, max: 100, 
+                    stateVi: "Rất ẩm", stateEn: "Very humid", 
+                    isSafe: false, 
+                    adviceVi: "Cần giảm độ ẩm ngay lập tức để bảo vệ sức khỏe.", adviceEn: "Immediately reduce humidity to protect health."
+                }
+            ],
+            illuminance_0001: [
+                { 
+                    min: 0, max: 1, 
+                    stateVi: "Tối hoàn toàn", stateEn: "Total darkness", 
+                    isSafe: false, 
+                    adviceVi: "Cần sử dụng đèn pin hoặc nguồn sáng khác nếu cần thiết.", 
+                    adviceEn: "Use a flashlight or other light source if necessary."
+                },
+                { 
+                    min: 1, max: 100, 
+                    stateVi: "Ánh sáng yếu", stateEn: "Weak light", 
+                    isSafe: true, 
+                    adviceVi: "Phù hợp cho môi trường làm việc và sinh hoạt thường ngày.", 
+                    adviceEn: "Suitable for daily activities and office work."
+                },
+                { 
+                    min: 100, max: 20000, 
+                    stateVi: "Ánh sáng trung bình", stateEn: "Average light", 
+                    isSafe: true, 
+                    adviceVi: "Thích hợp cho hầu hết các hoạt động trong nhà và ngoài trời ban ngày.", 
+                    adviceEn: "Suitable for most indoor and daytime outdoor activities."
+                },
+                { 
+                    min: 20000, max: 50000, 
+                    stateVi: "Ánh sáng mạnh", stateEn: "Strong light", 
+                    isSafe: false, 
+                    adviceVi: "Cần hạn chế thời gian tiếp xúc trực tiếp với ánh sáng mạnh này.", 
+                    adviceEn: "Limit direct exposure to this strong light."
+                },
+                { 
+                    min: 50000, max: 100000, 
+                    stateVi: "Ánh sáng cực mạnh", stateEn: "Very strong light", 
+                    isSafe: false, 
+                    adviceVi: "Nguy hiểm cho mắt, cần sử dụng kính bảo hộ khi tiếp xúc lâu dài.", 
+                    adviceEn: "Dangerous for eyes, use protective eyewear for prolonged exposure."
+                }
+            ],
+            atmosphere_0001: [
+                { 
+                    min: 0, max: 100, 
+                    stateVi: "Áp suất thấp", stateEn: "Low pressure", 
+                    isSafe: false, 
+                    adviceVi: "Cảnh báo về thời tiết khắc nghiệt, cần đề phòng các vấn đề sức khỏe.", 
+                    adviceEn: "Warning of severe weather, take precautions for health issues."
+                },
+                { 
+                    min: 100, max: 102, 
+                    stateVi: "Áp suất tiêu chuẩn", stateEn: "Standard pressure", 
+                    isSafe: true, 
+                    adviceVi: "Điều kiện thời tiết phù hợp, không cần đặc biệt lưu ý về áp suất khí quyển.", 
+                    adviceEn: "Appropriate weather conditions, no special concerns about atmospheric pressure."
+                },
+                { 
+                    min: 102, max: Infinity, 
+                    stateVi: "Áp suất cao", stateEn: "High pressure", 
+                    isSafe: false, 
+                    adviceVi: "Cần cân nhắc giảm thời gian ngoài trời nếu cơ thể không thích ứng tốt với áp suất cao.", 
+                    adviceEn: "Consider reducing outdoor activities if the body does not adapt well to high pressure."
+                }
+            ],
+            CO2_0001: [
+                { 
+                    min: 0, max: 350, 
+                    stateVi: "Rất lý tưởng", stateEn: "Very ideal", 
+                    isSafe: true, 
+                    adviceVi: "Môi trường khí CO2 tốt, không gây hại cho sức khỏe.", 
+                    adviceEn: "Good CO2 environment, not harmful to health."
+                },
+                { 
+                    min: 350, max: 400, 
+                    stateVi: "Tốt", stateEn: "Good", 
+                    isSafe: true, 
+                    adviceVi: "Môi trường khí CO2 vẫn còn trong giới hạn chấp nhận được.", 
+                    adviceEn: "CO2 environment still within acceptable limits."
+                },
+                { 
+                    min: 400, max: 450, 
+                    stateVi: "An toàn", stateEn: "Safe", 
+                    isSafe: true, 
+                    adviceVi: "Không gian khí CO2 ổn định, không gây ảnh hưởng đáng kể tới sức khỏe.", 
+                    adviceEn: "Stable CO2 levels, not significantly affecting health."
+                },
+                { 
+                    min: 450, max: 500, 
+                    stateVi: "Tác động nhẹ", stateEn: "Mild impact", 
+                    isSafe: false, 
+                    adviceVi: "Cần hạn chế thời gian tiếp xúc nếu có thể để giảm thiểu tác động của khí CO2.", 
+                    adviceEn: "Limit exposure time if possible to minimize the impact of CO2."
+                },
+                { 
+                    min: 500, max: 1000, 
+                    stateVi: "Khó chịu", stateEn: "Uncomfortable", 
+                    isSafe: false, 
+                    adviceVi: "Môi trường khí CO2 không thoải mái, cần cân nhắc hạn chế thời gian tiếp xúc.", 
+                    adviceEn: "Uncomfortable CO2 environment, consider limiting exposure time."
+                },
+                { 
+                    min: 1000, max: Infinity, 
+                    stateVi: "Gây hại", stateEn: "Harmful", 
+                    isSafe: false, 
+                    adviceVi: "Môi trường khí CO2 gây hại, cần hạn chế thời gian tiếp xúc và cải thiện không gian.", 
+                    adviceEn: "Harmful CO2 environment, limit exposure time and improve the environment."
+                }
+            ],
+            Nito_0002: [
+                { 
+                    min: 0, max: 1, 
+                    stateVi: "Lý tưởng", stateEn: "Ideal", 
+                    isSafe: true, 
+                    adviceVi: "Môi trường khí Nitơ tốt cho sức khỏe và sinh hoạt.", 
+                    adviceEn: "Good Nitrogen environment for health and daily activities."
+                },
+                { 
+                    min: 1, max: 10, 
+                    stateVi: "Chấp nhận được", stateEn: "Acceptable", 
+                    isSafe: true, 
+                    adviceVi: "Môi trường khí Nitơ vẫn ở mức chấp nhận được.", 
+                    adviceEn: "Nitrogen environment is still acceptable."
+                },
+                { 
+                    min: 10, max: Infinity, 
+                    stateVi: "Nguy hiểm", stateEn: "Dangerous", 
+                    isSafe: false, 
+                    adviceVi: "Cần hạn chế tiếp xúc với môi trường khí Nitơ này để tránh nguy cơ sức khỏe.", 
+                    adviceEn: "Limit exposure to this Nitrogen environment to avoid health risks."
+                }
+            ],
+            Photpho_0002: [
+                { 
+                    min: 0, max: 0.01, 
+                    stateVi: "Rất lý tưởng", stateEn: "Very ideal", 
+                    isSafe: true, 
+                    adviceVi: "Nồng độ Photpho trong giới hạn lý tưởng cho môi trường.", 
+                    adviceEn: "Phosphorus concentration within ideal limits for the environment."
+                },
+                { 
+                    min: 0.01, max: 0.03, 
+                    stateVi: "Thấp", stateEn: "Low", 
+                    isSafe: true, 
+                    adviceVi: "Nồng độ Photpho vẫn còn ở mức thấp và không gây ảnh hưởng đáng kể tới môi trường.", 
+                    adviceEn: "Phosphorus concentration is still low and does not significantly affect the environment."
+                },
+                { 
+                    min: 0.03, max: 0.1, 
+                    stateVi: "Trung bình", stateEn: "Medium", 
+                    isSafe: false, 
+                    adviceVi: "Cần quan sát và điều chỉnh nồng độ Photpho để tránh tác động xấu tới môi trường.", 
+                    adviceEn: "Monitor and adjust Phosphorus concentration to avoid adverse effects on the environment."
+                },
+                { 
+                    min: 0.1, max: 0.2, 
+                    stateVi: "Cao hơn bình thường", stateEn: "Higher than normal", 
+                    isSafe: false, 
+                    adviceVi: "Nồng độ Photpho cao hơn mức bình thường, cần giảm thiểu nguồn phóng xạ nếu có.", 
+                    adviceEn: "Phosphorus concentration higher than normal, minimize sources if possible."
+                },
+                { 
+                    min: 0.2, max: Infinity, 
+                    stateVi: "Rất cao", stateEn: "Very high", 
+                    isSafe: false, 
+                    adviceVi: "Nồng độ Photpho rất cao, có thể gây hại lâu dài tới môi trường và sức khỏe con người.", 
+                    adviceEn: "Very high Phosphorus concentration, may cause long-term harm to the environment and human health."
+                }
+            ],
+            Kali_0002: [
+                { 
+                    min: 0, max: 5, 
+                    stateVi: "Lý tưởng", stateEn: "Ideal", 
+                    isSafe: true, 
+                    adviceVi: "Nồng độ Kali trong giới hạn lý tưởng cho môi trường.", 
+                    adviceEn: "Potassium concentration within ideal limits for the environment."
+                },
+                { 
+                    min: 5, max: 10, 
+                    stateVi: "Chấp nhận được", stateEn: "Acceptable", 
+                    isSafe: true, 
+                    adviceVi: "Nồng độ Kali vẫn ở mức chấp nhận được và không gây tác động xấu đáng kể tới môi trường.", 
+                    adviceEn: "Potassium concentration is still acceptable and does not significantly affect the environment."
+                },
+                { 
+                    min: 10, max: 20, 
+                    stateVi: "Cao hơn mức bình thường", stateEn: "Higher than normal", 
+                    isSafe: false, 
+                    adviceVi: "Nồng độ Kali cao hơn mức bình thường, cần quản lý để tránh tác động xấu tới hệ sinh thái.", 
+                    adviceEn: "Potassium concentration higher than normal, manage to avoid adverse effects on the ecosystem."
+                },
+                { 
+                    min: 20, max: Infinity, 
+                    stateVi: "Cao", stateEn: "High", 
+                    isSafe: false, 
+                    adviceVi: "Nồng độ Kali quá cao, có thể gây ảnh hưởng nghiêm trọng tới hệ sinh thái và sức khỏe con người.", 
+                    adviceEn: "Potassium concentration too high, may cause serious impacts on ecosystems and human health."
+                }
+            ]
+        };
+
+        // Phân tích từng thuộc tính
+        const analysis = Object.keys(trends).map(attribute => {
+            const result = analyzeAttribute(trends[attribute], safe[attribute], safeRanges[attribute]);
+            return { attribute, ...result };
+        });
+
+        res.json(analysis);
+    } catch (err) {
+        console.error('Error retrieving data from database:', err);
+        res.status(500).send('Error retrieving data from database');
     }
 });

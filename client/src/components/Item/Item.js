@@ -1,6 +1,25 @@
 import { Card } from 'reactstrap';
 import '../../assets/css/item.css';
-function Item({ additionalClass, icon, name, value, unit }) {
+import { useSelector } from 'react-redux';
+function Item({ additionalClass, icon, name, value, unit, max, min, change, stateVi, stateEn, adviceVi, adviceEn,safe}) {
+    const language = useSelector((state) => state.language.language);
+    let changeText;
+    let safeText;
+  if (change === 'Tăng') {
+    changeText = language === 'en' ? 'Increased' : 'Tăng';
+  } else if (change === 'Giảm') {
+    changeText = language === 'en' ? 'Decreased' : 'Giảm';
+  } else {
+    changeText = language === 'en' ? 'No change' : 'Không thay đổi';
+  }
+
+  if (safe === true) {
+    safeText = language === 'en' ? 'Safe' : 'An toàn';
+  } 
+  else {
+    safeText = language === 'en' ? 'No safe' : 'Không an toàn';
+  }
+
     return (
         <Card
             className={`card-chart ${additionalClass.additionalClass === 'additional-white-class' ? 'white-content' : ''}`}
@@ -22,6 +41,12 @@ function Item({ additionalClass, icon, name, value, unit }) {
                                         </span>
                                     </h6>
                                 </div>
+                                <div className='minmaxAttribute'>
+                                    <div style={{marginLeft:"1rem"}}>
+                                    <p>{language === 'en' ? `Max | ${max} ${unit}` : `Cao nhất | ${max} ${unit}`}</p>
+                                    <p>{language === 'en' ? `Min | ${min} ${unit}` : `Thấp nhất | ${min} ${unit}`}</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 css-nbt530">
                                 <div class="MuiBox-root css-uo81m3">
@@ -29,6 +54,12 @@ function Item({ additionalClass, icon, name, value, unit }) {
                                 </div>
                             </div>
                         </div>
+                        <div style={{display:'flex',justifyContent:'center',gap:'1.5rem'}}> 
+                                        <p>{safeText}</p>
+                                        <p>{changeText}</p>
+                        </div>
+                        <p>{language === 'en' ? `State:  ${stateEn}` : `Trạng thái: ${stateVi}`}</p>
+                        <p className='advice-paragraph'> <span style={{fontWeight:"bold", color:"rgb(1, 181, 116)"} }>{language === 'en' ? `Advice:  ${adviceEn}` : `Lời khuyên: ${adviceVi}`}</span></p>
                     </div>
                 </div>
             </div>

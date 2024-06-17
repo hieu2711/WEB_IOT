@@ -1,94 +1,97 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from 'contexts/ThemeContext';
-import Chart from './Chart';
-import Detail from './Detail';
-import { Button, ButtonGroup } from 'reactstrap';
-import { authApi, endpoints } from 'configs/Apis';
-import Swal from 'sweetalert2';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+    import React, { useContext, useEffect, useState } from 'react';
+    import { ThemeContext } from 'contexts/ThemeContext';
+    import Chart from './Chart';
+    import Detail from './Detail';
+    import { Button, ButtonGroup } from 'reactstrap';
+    import { authApi, endpoints } from 'configs/Apis';
+    import Swal from 'sweetalert2';
+    import { useTranslation } from 'react-i18next';
+    import { useSelector } from 'react-redux';
+    import { Navigate } from 'react-router-dom';
 
-function Dashboard(props) {
-    const [type, setType] = useState('chart');
-    const { theme } = useContext(ThemeContext);
-    const [additionalClass, setAdditionalClass] = useState('');
-    const [info, setInfo] = useState();
-    const [number, setNumber] = useState();
-    const [dataColapse, setDataColapse] = useState();
-    const [hasNewData, setHasNewData] = useState(false);
-    const [renderChart, setRenderChart] = useState(1);
-    const { t } = useTranslation();
-    const language = useSelector((state) => state.language.language);
-    const [loading, setLoading] = useState(false);
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    useEffect(() => {
-        if (theme === 'white-content') {
-            setAdditionalClass('additional-white-class');
-        } else {
-            setAdditionalClass('');
-        }
+    function Dashboard(props) {
+        const [type, setType] = useState('chart');
+        const { theme } = useContext(ThemeContext);
+        const [additionalClass, setAdditionalClass] = useState('');
+        const [info, setInfo] = useState();
+        const [number, setNumber] = useState();
+        const [dataColapse, setDataColapse] = useState();
+        const [hasNewData, setHasNewData] = useState(false);
+        const [renderChart, setRenderChart] = useState(1);
+        const { t } = useTranslation();
+        const language = useSelector((state) => state.language.language);
+        const [loading, setLoading] = useState(false);
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        useEffect(() => {
+            if (theme === 'white-content') {
+                setAdditionalClass('additional-white-class');
+            } else {
+                setAdditionalClass('');
+            }
 
-        if (type === 'detail') {
-            setType('detail');
-        } else {
-            setType('chart');
-        }
-    }, [theme, type]);
+            if (type === 'detail') {
+                setType('detail');
+            } else {
+                setType('chart');
+            }
+        }, [theme, type]);
 
-    useEffect(() => {
-        setLoading(true);
-        const loadInfo = async () => {
-            let { data } = await authApi().get(endpoints['info']);
-            setInfo(data);
-            const number = data.filter(
-                (item) => item.sensors_name === 'atmosphere_0001',
+        useEffect(() => {
+            setLoading(true);
+            const loadInfo = async () => {
+                let { data } = await authApi().get(endpoints['info']);
+                setInfo(data);
+                const number = data.filter(
+                    (item) => item.sensors_name === 'atmosphere_0001',
+                );
+                console.log(data)
+                if(number){
+                    setNumber(Math.floor(number[0].sensors_value) || 100);
+                }
+                setLoading(false);
+            };
+
+            const loadDataColapse = async () => {
+                let { data } = await authApi().get(
+                    endpoints['chartPowerAndHudmityTop10'],
+                );
+                setDataColapse(data);
+                setLoading(false);
+            };
+            loadInfo();
+            loadDataColapse();
+            setHasNewData(false);
+        }, [hasNewData]);
+
+        useEffect(() => {
+            const eventSource = new EventSource(
+                'https://web-iot-server.onrender.com/api/sse',
             );
-            setNumber(Math.floor(number[0].sensors_value));
-            setLoading(false);
+
+            eventSource.onmessage = function (event) {
+                const newData = JSON.parse(event.data);
+                const message =
+                    language === 'en'
+                        ? 'Data has been updated!'
+                        : 'Dữ liệu đã được cập nhật!';
+                const title =
+                    language === 'en' ? 'Updating data' : 'Cập nhật dữ liệu';
+                Swal.fire(title, message, 'success');
+                setHasNewData(true);
+            };
+
+            return () => {
+                eventSource.close();
+            };
+        }, []);
+
+        const handleButtonClick = () => {
+            const newClickCount = renderChart + 1 > 3 ? 1 : renderChart + 1;
+            setRenderChart(newClickCount);
         };
-
-        const loadDataColapse = async () => {
-            let { data } = await authApi().get(
-                endpoints['chartPowerAndHudmityTop10'],
-            );
-            setDataColapse(data);
-            setLoading(false);
-        };
-        loadInfo();
-        loadDataColapse();
-        setHasNewData(false);
-    }, [hasNewData]);
-
-    useEffect(() => {
-        const eventSource = new EventSource(
-            'https://web-iot-server.onrender.com/api/sse',
-        );
-
-        eventSource.onmessage = function (event) {
-            const newData = JSON.parse(event.data);
-            const message =
-                language === 'en'
-                    ? 'Data has been updated!'
-                    : 'Dữ liệu đã được cập nhật!';
-            const title =
-                language === 'en' ? 'Updating data' : 'Cập nhật dữ liệu';
-            Swal.fire(title, message, 'success');
-            setHasNewData(true);
-        };
-
-        return () => {
-            eventSource.close();
-        };
-    }, []);
-
-    const handleButtonClick = () => {
-        const newClickCount = renderChart + 1 > 3 ? 1 : renderChart + 1;
-        setRenderChart(newClickCount);
-    };
-    if (!isLoggedIn) {
-        return <Navigate to="/sign-in" />;
-    }
+        if (!isLoggedIn) {
+            return <Navigate to="/sign-in" />;
+        }
     return (
         <>
             <div className="content">

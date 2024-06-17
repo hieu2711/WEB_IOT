@@ -208,7 +208,7 @@ function Detail({ data, additionalClass, commondata }) {
                         icon={'graphic_eq'}
                         value={noise && noise.value}
                         unit={'dB'}
-                        name={language === 'en' ? 'Humidity' : 'Độ ẩm'}
+                        name={language === 'en' ? 'Noise' : 'Tiếng ồn'}
                         max={dataMinMax && dataMinMax[0].max_noise_0001}                        
                         min={dataMinMax && dataMinMax[0].min_noise_0001}
                         change={noise && noise.trend}

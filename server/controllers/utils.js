@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const moment = require('moment');
 const Sensors = require('../models/Sensor');
 require('dotenv').config();
+const { Sequelize } = require('sequelize');
 // Thông tin tài khoản email để gửi mã OTP
 const emailConfig = {
     service: 'Gmail',
@@ -15,6 +16,37 @@ const emailConfig = {
 const transporter = nodemailer.createTransport(emailConfig);
 
 // Tạo mã OTP
+
+// Hàm cập nhật cộng thêm 7 giờ vào 22 dòng có id lớn nhất
+async function updateTop22Ids() {
+    try {
+        // Lấy 22 id lớn nhất
+        const rows = await Sensors.findAll({
+            attributes: ['sensors_id'], // Đổi lại thành 'sensors_id' nếu đúng với tên cột trong cơ sở dữ liệu
+            order: [['sensors_id', 'DESC']], // Đổi lại thành 'sensors_id' nếu đúng với tên cột trong cơ sở dữ liệu
+            limit: 22
+        });
+
+        // Thu thập ids từ mảng các đối tượng Sequelize
+        const ids = rows.map(row => row.dataValues.sensors_id); // Đổi lại thành 'sensors_id' nếu đúng với tên cột trong cơ sở dữ liệu
+
+        if (ids.length > 0) {
+            // Cập nhật các hàng có id trong danh sách
+            await Sensors.update({
+                sensors_datetime: sequelize.literal('DATE_ADD(sensors_datetime, INTERVAL 7 HOUR)')
+            }, {
+                where: {
+                    sensors_id: ids // Đổi lại thành 'sensors_id' nếu đúng với tên cột trong cơ sở dữ liệu
+                }
+            });
+            console.log('Cập nhật thành công!');
+        } else {
+            console.log('Không tìm thấy dữ liệu để cập nhật.');
+        }
+    } catch (error) {
+        console.error('Lỗi khi cập nhật:', error);
+    }
+}
 
 const generateOTP = () => {
     const secret = speakeasy.generateSecret({ length: 20 }); // Tạo khóa bí mật mới
@@ -132,4 +164,4 @@ async function saveDataToDatabase(jsonData, check) {
     }
 }
 
-module.exports = { generateOTP, sendOTPByEmail , checkAndSaveData, saveDataToDatabase};
+module.exports = { generateOTP, sendOTPByEmail , checkAndSaveData, saveDataToDatabase, updateTop22Ids};

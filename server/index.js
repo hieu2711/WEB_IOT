@@ -20,7 +20,7 @@ const Sensor = require("../server/models/Sensor");
 const authRoute = require("../server/routes/auth");
 const userRoute = require("../server/routes/user");
 require('dotenv').config();
-const { checkAndSaveData, saveDataToDatabase } = require("../server/controllers/utils");
+const { checkAndSaveData, saveDataToDatabase, updateTop22Ids } = require("../server/controllers/utils");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -71,6 +71,7 @@ client.on('message', async (topic, receivedMessage) => {
         const check = await checkAndSaveData(messageJSON); // Chờ hàm này hoàn thành trước khi tiếp tục
         console.log(check)
         await saveDataToDatabase(messageJSON, check); // Chờ hàm này hoàn thành trước khi tiếp tục
+        await updateTop22Ids();
     } catch (error) {
         console.error('Lỗi khi phân tích JSON:', error);
         // Xử lý lỗi ở đây

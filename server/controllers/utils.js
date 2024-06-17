@@ -4,6 +4,10 @@ const moment = require('moment');
 const Sensors = require('../models/Sensor');
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql'
+});
 // Thông tin tài khoản email để gửi mã OTP
 const emailConfig = {
     service: 'Gmail',

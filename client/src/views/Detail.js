@@ -73,7 +73,7 @@ function Detail({ data, additionalClass, commondata }) {
     }, [hasNewData]);
     useEffect(() => {
         const eventSource = new EventSource(
-            'https://web-iot-server.onrender.com/api/sse',
+            `${SERVER}/api/sse`,
         );
 
         eventSource.onmessage = function (event) {

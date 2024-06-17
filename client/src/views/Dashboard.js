@@ -8,6 +8,7 @@
     import { useTranslation } from 'react-i18next';
     import { useSelector } from 'react-redux';
     import { Navigate } from 'react-router-dom';
+import { SERVER } from 'configs/Apis';
 
     function Dashboard(props) {
         const [type, setType] = useState('chart');
@@ -65,7 +66,7 @@
 
         useEffect(() => {
             const eventSource = new EventSource(
-                'https://web-iot-server.onrender.com/api/sse',
+                `${SERVER}/api/sse`,
             );
 
             eventSource.onmessage = function (event) {

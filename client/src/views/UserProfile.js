@@ -20,6 +20,7 @@ import {
 } from 'reactstrap';
 import Swal from 'sweetalert2';
 import { Navigate } from 'react-router-dom';
+import { SERVER } from 'configs/Apis';
 
 function UserProfile() {
     const dispatch = useDispatch();
@@ -95,7 +96,7 @@ function UserProfile() {
         };
         try {
             const response = await fetch(
-                'https://web-iot-server.onrender.com/api/user?id=' +
+                `${SERVER}/api/user?id=` +
                     user.userid,
                 {
                     method: 'PUT',

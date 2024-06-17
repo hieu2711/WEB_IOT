@@ -1143,9 +1143,9 @@ function analyzeAttribute(attributesTrend, safe, safeRanges) {
     if (isIncreasing && isDecreasing) {
         trend = "Không thay đổi";
     } else if (isIncreasing) {
-        trend = "Vừa tăng";
+        trend = "Tăng";
     } else if (isDecreasing) {
-        trend = "Vừa giảm";
+        trend = "Giảm";
     } else {
         trend = "Không thay đổi";
     }

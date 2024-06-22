@@ -1,6 +1,5 @@
 import React from 'react';
 
-// reactstrap components
 import { Dropdown, DropdownToggle, Badge } from 'reactstrap';
 import { ThemeContext, themes } from 'contexts/ThemeContext';
 import { backgroundColors } from 'contexts/BackgroundColorContext';

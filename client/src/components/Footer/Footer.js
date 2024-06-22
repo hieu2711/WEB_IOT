@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-// reactstrap components
 import { Container, Nav, NavItem, NavLink } from 'reactstrap';
 
 function Footer() {

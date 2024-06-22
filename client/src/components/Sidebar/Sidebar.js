@@ -43,7 +43,7 @@ function Sidebar(props) {
         const tokenExpTime = tokenPayload.exp * 1000;
         const currentTime = Date.now();
         if (currentTime > tokenExpTime) {
-            handleLogout(); // Đăng xuất người dùng nếu token hết hạn
+            handleLogout(); 
             showSessionExpiredAlert();
         }
     };

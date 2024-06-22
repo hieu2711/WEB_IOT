@@ -19,7 +19,7 @@ function Item({ additionalClass, icon, name, value, unit, max, min, change, stat
   else {
     safeText = language === 'en' ? 'No safe' : 'Không an toàn';
   }
-
+  const safeTextColor = safe ? 'rgb(1, 181, 116)' : '#FF0000';
     return (
         <Card
             className={`card-chart ${additionalClass.additionalClass === 'additional-white-class' ? 'white-content' : ''}`}
@@ -55,11 +55,11 @@ function Item({ additionalClass, icon, name, value, unit, max, min, change, stat
                             </div>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',gap:'1.5rem'}}> 
-                                        <p>{safeText}</p>
+                        <p style={{ color: safeTextColor, fontWeight:'bold'}}>{safeText}</p>
                                         <p>{changeText}</p>
                         </div>
-                        <p>{language === 'en' ? `State:  ${stateEn}` : `Trạng thái: ${stateVi}`}</p>
-                        <p className='advice-paragraph'> <span style={{fontWeight:"bold", color:"rgb(1, 181, 116)"} }>{language === 'en' ? `Advice:  ${adviceEn}` : `Lời khuyên: ${adviceVi}`}</span></p>
+                        <p style={{fontWeight:"bold", color:"rgb(1, 181, 116)"} }>{language === 'en' ? `State:  ${stateEn}` : `Trạng thái: ${stateVi}`}</p>
+                        <p className='advice-paragraph'> <span>{language === 'en' ? `Advice:  ${adviceEn}` : `Lời khuyên: ${adviceVi}`}</span></p>
                     </div>
                 </div>
             </div>

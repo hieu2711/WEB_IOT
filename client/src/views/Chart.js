@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import { Col, Row } from 'reactstrap';
+import { SERVER } from 'configs/Apis';
+
 function Chart({ data, number, commondata, renderChart }) {
     const [dataTemp, setDataTemp] = useState();
     const [dataPower, setDataPower] = useState();
@@ -32,7 +34,7 @@ function Chart({ data, number, commondata, renderChart }) {
     }, [hasNewData]);
     useEffect(() => {
         const eventSource = new EventSource(
-            'https://web-iot-server.onrender.com/api/sse',
+            `${SERVER}/api/sse`,
         );
 
         eventSource.onmessage = function (event) {

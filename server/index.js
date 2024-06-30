@@ -29,54 +29,54 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     host: process.env.DB_HOST,
     dialect: 'mysql'
 });
-// const brokerUrl = 'mqtt://mqttserver.tk';
-// const brokerPort = 1883;
-// const brokerUsername = 'innovation';
-// const brokerPassword = 'Innovation_RgPQAZoA5N';
-// const topic = '/innovation/airmonitoring/WSNs';
-// const CLIENT_ID = 'innovation';
-// const CLEAN_SESSION = true;
-// const KEEP_ALIVE_INTERVAL = 60;
+const brokerUrl = 'mqtt://mqttserver.tk';
+const brokerPort = 1883;
+const brokerUsername = 'innovation';
+const brokerPassword = 'Innovation_RgPQAZoA5N';
+const topic = '/innovation/airmonitoring/WSNs';
+const CLIENT_ID = 'innovation';
+const CLEAN_SESSION = true;
+const KEEP_ALIVE_INTERVAL = 60;
 
-// const client = mqtt.connect(brokerUrl, {
-//     port: brokerPort,
-//     username: brokerUsername,
-//     password: brokerPassword,
-//     clientId: CLIENT_ID,
-//     clean: CLEAN_SESSION,
-//     keepalive: KEEP_ALIVE_INTERVAL, // Thêm keep-alive
-//     reconnectPeriod: 1000, // Tự động kết nối lại sau 1 giây nếu mất kết nối
-//     connectTimeout: 30 * 1000, // Thời gian chờ kết nối là 30 giây
-// });
+const client = mqtt.connect(brokerUrl, {
+    port: brokerPort,
+    username: brokerUsername,
+    password: brokerPassword,
+    clientId: CLIENT_ID,
+    clean: CLEAN_SESSION,
+    keepalive: KEEP_ALIVE_INTERVAL, // Thêm keep-alive
+    reconnectPeriod: 1000, // Tự động kết nối lại sau 1 giây nếu mất kết nối
+    connectTimeout: 30 * 1000, // Thời gian chờ kết nối là 30 giây
+});
 
-// client.on('connect', () => {
-//     console.log('Connected to broker');
-//     client.subscribe(topic, (err) => {
-//         if (err) {
-//             console.error('Failed to subscribe:', err);
-//         } else {
-//             console.log(`Subscribed to ${topic}`);
-//         }
-//     });
-// });
+client.on('connect', () => {
+    console.log('Connected to broker');
+    client.subscribe(topic, (err) => {
+        if (err) {
+            console.error('Failed to subscribe:', err);
+        } else {
+            console.log(`Subscribed to ${topic}`);
+        }
+    });
+});
 
-// client.on('message', async (topic, receivedMessage) => {
-//     const messageString = receivedMessage.toString();
+client.on('message', async (topic, receivedMessage) => {
+    const messageString = receivedMessage.toString();
 
-//     try {
-//         const jsonStringWithDoubleQuotes = messageString.replace(/'/g, '"');
-//         const messageJSON = JSON.parse(jsonStringWithDoubleQuotes);
-//         console.log(`Received JSON message on topic ${topic}:`, messageJSON);
-//         // Xử lý thông điệp JSON ở đây
-//         const check = await checkAndSaveData(messageJSON); // Chờ hàm này hoàn thành trước khi tiếp tục
-//         console.log(check)
-//         await saveDataToDatabase(messageJSON, check); // Chờ hàm này hoàn thành trước khi tiếp tục
-//         await updateTop22Ids();
-//     } catch (error) {
-//         console.error('Lỗi khi phân tích JSON:', error);
-//         // Xử lý lỗi ở đây
-//     }
-// });
+    try {
+        const jsonStringWithDoubleQuotes = messageString.replace(/'/g, '"');
+        const messageJSON = JSON.parse(jsonStringWithDoubleQuotes);
+        console.log(`Received JSON message on topic ${topic}:`, messageJSON);
+        // Xử lý thông điệp JSON ở đây
+        const check = await checkAndSaveData(messageJSON); // Chờ hàm này hoàn thành trước khi tiếp tục
+        console.log(check)
+        await saveDataToDatabase(messageJSON, check); // Chờ hàm này hoàn thành trước khi tiếp tục
+        await updateTop22Ids();
+    } catch (error) {
+        console.error('Lỗi khi phân tích JSON:', error);
+        // Xử lý lỗi ở đây
+    }
+});
 
 function sendSSEData(data) {
     sseClients.forEach(client => {

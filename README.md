@@ -1,5 +1,9 @@
 # WEB_IOT
-**Cài đặt phía Client:**
+The project takes information from the monitoring stations with MQTT protocols and render data for users
+## Settings:
+1. **Clone repository**:
+      ```bash
+   git clone [https://github.com/username/repository-name.git](https://github.com/hieu2711/WEB_IOT)
 <br>
 cd client : chuyển sang nhánh client 
 <br>
